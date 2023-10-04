@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .timeline {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .line {
+            width: 2px;
+            height: 400px;
+            background-color: #ccc;
+            position: absolute;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 50%;
+            position: absolute;
+            transition: transform 0.3s;
+        }
+
+        .horizontal-line {
+            width: 60px;
+            height: 2px;
+            background-color: #ccc;
+            position: absolute;
+        }
+
+        .dot:nth-child(1) { top: 0; left: 50%; transform: translate(-50%, -50%); }
+        .dot:nth-child(2) { top: 80px; left: -60px; transform: translate(-100%, -50%); }
+        .dot:nth-child(3) { top: 160px; left: 60px; transform: translate(0%, -50%); }
+        .dot:nth-child(4) { top: 240px; left: -60px; transform: translate(-100%, -50%); }
+        .dot:nth-child(5) { top: 320px; left: 60px; transform: translate(0%, -50%); }
+        .dot:nth-child(6) { bottom: 0; left: 0px; transform: translate(-50%, 50%); }
+
+        .horizontal-line:nth-child(7) { top: 80px; left: -60px; }
+		.horizontal-line:nth-child(8) { top: 160px; left: 0px; }
+		.horizontal-line:nth-child(9) { top: 240px; left: -60px; }
+		.horizontal-line:nth-child(10) { top: 320px; left: 0px; }
+    </style>
+</head>
+<body>
+    <h1>Game</h1>
+    <div class="timeline">
+        <div class="line">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="horizontal-line"></div>
+            <div class="horizontal-line"></div>
+			<div class="horizontal-line"></div>
+            <div class="horizontal-line"></div>
+			
+        </div>
+    </div>
+</body>
+</html>

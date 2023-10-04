@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            margin: 0;
+            padding: 50px 10%;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .equipe {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .membro {
+            flex: 1;
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .membro img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .membro:hover img {
+            transform: scale(1.1);
+        }
+
+        .nome {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Equipe</h1>
+    <div class="equipe">
+        <div class="membro">
+            <img src="carol.png" alt="Carol">
+            <div class="nome">Carol</div>
+        </div>
+        <div class="membro">
+            <img src="leticia.png" alt="Leticia">
+            <div class="nome">Leticia</div>
+        </div>
+        <div class="membro">
+            <img src="joao.png" alt="João">
+            <div class="nome">João</div>
+        </div>
+        <div class="membro">
+            <img src="jorge.png" alt="Jorge">
+            <div class="nome">Jorge</div>
+        </div>
+        <div class="membro">
+            <img src="vitor.png" alt="Vitor">
+            <div class="nome">Vitor</div>
+        </div>
+    </div>
+</body>
+</html>

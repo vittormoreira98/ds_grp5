@@ -2,89 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>WN Site</title>
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; 
-        }
-        iframe {
-            width: 100%;
-            border: none;
-            display: block;
-        }
-        #headerFrame {
-            height: 100px; 
-        }
-        #contentFrame {
-            height: calc(100% - 100px); 
-        }
-		header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            background-color: #fff;
-            border-bottom: 1px solid #e1e1e1;
-        }
-        nav {
-            display: flex;
-            gap: 30px;
-            position: relative;
-        }
-        nav a {
-            color: black;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        nav a:hover {
-            color: #555;
-        }
-        .submenu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 20;
-            background-color: #fff;
-            border: 1px solid #e1e1e1;
-            z-index: 10;
-        }
-        .submenu a {
-            display: block;
-            padding: 8px 15px;
-        }
-        .submenu a:hover {
-            background-color: #f1f1f1;
-        }
-        nav .submenu-item:hover .submenu {
-            display: block;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woznext</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<header>
-        <div>WN</div>
-        <nav>
-            <a href="home.html" target="contentFrame">Home</a>
-            <div class="submenu-item">
-                <a>Steve Wosniak</a>
-                <div class="submenu">
-                    <a href="steve_sobre.html" target="contentFrame">Quem é Steve Wozniak</a>
-                    <a href="#">Vida e Tragetória</a>
-                    <a href="#">Carreira</a>
-                    <a href="#">Filantropia</a>
-                </div>
-            </div>
-            <a href="next_computer_sobre.html" target="contentFrame">Next Computer</a>
-            <a href="timeline.html" target="contentFrame">Timeline</a>
-            <a href="game.html" target="contentFrame">Game</a>
-            <a href="equipe.html" target="contentFrame">Equipe</a>
-        </nav>
-        <div>Texto</div>
-    </header>
-    <!-- <iframe src="header.html" id="headerFrame" name="headerFrame"></iframe> -->
-    <iframe src="home.html" id="contentFrame" name="contentFrame"></iframe>
+
+<header>
+    <iframe src="header.html" height="100%" width="100%" title="Cabeçalho" style="border:none;"></iframe>
+</header>
+
+<main>
+    <iframe src="home.html" name="conteudoFrame" width="100%" height="100%" title="Conteúdo" style="border:none;"></iframe>
+</main>
+
+<footer>
+    <iframe src="footer.html" height="100%" width="100%" title="Rodapé" style="border:none;"></iframe>
+</footer>
+
 </body>
 </html>

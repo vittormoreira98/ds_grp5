@@ -1,0 +1,15 @@
+/* footer.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    background-color: #004aad;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 20px;
+    position: relative;
+}

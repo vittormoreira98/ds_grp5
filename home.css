@@ -1,0 +1,80 @@
+/* home.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding: 0px;
+    background-color: white;
+}
+
+.content h2 {
+    font-size: 50px;
+    color: #333;
+}
+
+.content p {
+    font-size: 20px;
+    color: #333;
+}
+
+.content-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0px;
+}
+
+.content-text h2,
+.content-text h3 {
+    margin: 0;
+}
+
+.content-text img {
+    clip-path: polygon(35% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+@media (max-width: 600px) {
+    .content {
+        flex-direction: column;
+    }
+
+    .content img {
+        margin-left: 0;
+        margin-bottom: 50px;
+    }
+}
+
+.boxes {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0px 0;
+}
+
+.box {
+    background-color: white;
+    color: rgb(181, 181, 181);
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 80px;
+}
+
+.box img {
+    margin-right: 20px;
+}
+
+.box p {
+    font-size: 15px;
+    color: rgb(181, 181, 181);
+}

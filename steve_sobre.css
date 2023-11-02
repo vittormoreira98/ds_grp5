@@ -1,0 +1,74 @@
+/* home.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding: 0px;
+    background-color: white;
+}
+
+.content h2 {
+    font-size: 50px;
+    color: #333;
+}
+
+.content p {
+    font-size: 20px;
+    color: #333;
+}
+
+.content-text-1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.content-text-1 h2,
+.content-text-1 h3 {
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: justify;
+}
+
+.content-text-1 img {
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+    margin: 0px;
+    width: 50%;
+}
+
+.content-text-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+.content-text-2 h2,
+.content-text-2 h3 {
+    
+    margin-left: 10%;
+    margin-right: 10%;
+    /* align-content: center; */
+    text-align: justify;
+}
+
+.content-text-2 img {
+    clip-path: polygon(75% 0, 0% 0, 0% 100%, 100% 100%);
+    margin: 0px;
+    width: 50%;
+}
+
+

@@ -27,6 +27,7 @@
             flex: 1;
             text-align: center;
             margin: 0 10px;
+            position: relative; /* Adicione isso para posicionar absolutamente o overlay */
         }
 
         .membro img {
@@ -44,6 +45,38 @@
             font-size: 18px;
             margin-top: 10px;
         }
+
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('x-vermelho.png') center/92% no-repeat;
+            background-color: transparent;/*rgba(255, 0, 0, 0.5); /* Adicione transparência se desejar */
+        }
+
+        /* Alternativamente, se você quiser criar um X com CSS em vez de usar uma imagem: */
+        .overlay::before,
+        .overlay::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 220px; /* 110% da largura da imagem, ajuste conforme necessário */
+            height: 20px; /* Espessura do X */
+            background-color: red;
+        }
+
+        .overlay::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .overlay::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
     </style>
 </head>
 <body>
@@ -58,6 +91,7 @@
             <div class="nome">Leticia</div>
         </div>
         <div class="membro">
+            <div class="overlay"></div>
             <img src="joao.png" alt="João">
             <div class="nome">João</div>
         </div>

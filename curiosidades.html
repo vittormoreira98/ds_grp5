@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Curiosidades</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #FFFFFF;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: #000000;
+        }
+
+        .main {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .content-container {
+            position: relative; /* Added position relative here */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px; /* Add margin to separate the content containers */
+        }
+
+        .box {
+            border: 3px solid #004aad;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 20px;
+            flex: 1;
+            text-align: justify;
+            position: relative; /* Add position relative here */
+            z-index: 0; /* Higher z-index to keep text above the circle */
+        }
+        
+        .box p {
+            margin: 20px;
+        }
+        .circle {
+            background-color: #808080;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            margin-left: 95%;
+            margin-right: 95%;
+            position: absolute; /* Changed to absolute */
+            top: 50%; /* Center the circle vertically */
+            transform: translateY(-50%); /* Adjust vertical alignment */
+            z-index: 1; /* Lower z-index to keep the circle below the text */
+        }
+
+        /* Adjust the left or right position depending on the circle location */
+        .content-container:nth-child(even) .circle {
+            right: 10px;
+        }
+
+        .content-container:nth-child(odd) .circle {
+            left: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+            .content-container .circle {
+                position: static; /* Reset position on small screens */
+                margin: 20px 0; /* Add some margin for spacing */
+            }
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Curiosidades</h1>
+    </header>
+    <main class="main"> <!-- Corrected missing class here -->
+        <div class="content-container">
+            <section class="box">
+                <p>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto</p>
+            </section>
+            <div class="circle"></div>
+        </div>
+        <div class="content-container">
+            <div class="circle"></div>
+            <section class="box">
+                <p>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto</p>
+            </section>
+        </div>
+        <div class="content-container">
+            <section class="box">
+                <p>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto</p>
+            </section>
+            <div class="circle"></div>
+        </div>
+        <div class="content-container">
+            <div class="circle"></div>
+            <section class="box">
+                <p>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto</p>
+            </section>
+        </div>
+    </main>
+</body>
+</html>

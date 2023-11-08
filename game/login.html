@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woznext Games</title>
+    <link rel="icon" href="imagens/icone.png" type="image/png">
+    <style>
+        body, html {
+            margin-top: 1%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background-color: white; /* A cor de fundo azul conforme o mockup */
+        }
+        .container {
+            width: 1450px; /* Largura do container baseado na imagem */
+            height: 480px;
+            background: #007bff;
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* Espaçamento entre elementos */
+        }
+        .logo {
+            width: 200px; /* Tamanho do logo baseado na imagem */
+        }
+        .title {
+            color: white; /* Cor azul do título */
+            font-size: 34px; /* Tamanho da fonte do título */
+            text-align: center;
+            padding: 0px;
+        }
+        .input-box {
+            width: 40%;
+            padding: 10px;
+            text-align: center;
+        }
+        .input-field {
+            width: 80%;
+            text-align: center;
+            padding: 10px;
+            border-radius: 20px;
+            border: 2px solid #ced4da; /* Cor da borda do campo de input */
+            font-size: 26px; /* Tamanho da fonte do input */
+            color: #495057; /* Cor do texto do input */
+        }
+        .button {
+            width: 40%;
+            padding: 0px;
+            border-radius: 20px;
+            border: none;
+            background: transparent; /* Cor de fundo do botão azul */
+            color: white;
+            font-size: 34px; /* Tamanho da fonte do botão */
+            cursor: pointer;
+            border: 2px solid white; /* Cor da borda do botão */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="imagens/logo_game_branco_sem_fundologo.png" alt="Logo" class="logo">
+        <h1 class="title">Woznext Games</h1>
+        <div class="input-box">
+            <input type="text" placeholder="Apelido" class="input-field">
+        </div>
+        <button class="button">Entrar</button>
+    </div>
+</body>
+</html>

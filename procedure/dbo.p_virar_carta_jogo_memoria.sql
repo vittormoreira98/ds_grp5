@@ -23,6 +23,7 @@ declare @cd_retorno int, @nm_retorno varchar(max),@nr_versao_proc varchar(15)
 exec dbo.p_virar_carta_jogo_memoria
 	@id_carta		= 1,
 	@cd_usuario		= 'vitor',
+	@id_partida		= 1,
 	@cd_retorno		= @cd_retorno output,
 	@nm_retorno		= @nm_retorno output,
 	@nr_versao_proc	= @nr_versao_proc output
@@ -44,7 +45,14 @@ begin try
         declare
             @dt_sistema datetime = getdate()
     end
-    
+
+	insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
+	('linha50','linha50',@dt_sistema),
+	('@id_carta',convert(varchar(max),@id_carta),@dt_sistema),
+	('@cd_usuario',@cd_usuario,@dt_sistema),
+	('@id_partida',convert(varchar(max),@id_partida),@dt_sistema)
+
+	select @fl_virar_carta = 1
     /*Pré validações*/
     begin
         if @id_carta is null
@@ -71,6 +79,8 @@ begin try
 	select	@cd_retorno = 0,
 			@nm_retorno = 'Processamento efetuado com sucesso'
 	
+
+
 end try
 begin catch
 	set @cd_retorno =	1
@@ -78,5 +88,6 @@ begin catch
 					+ case when @nm_proc <> isnull(error_procedure(),@nm_proc) then 'Erro na procedure: ' + error_procedure() else '' end
 					+ 'Mensagem: ' + isnull(convert(varchar(300), error_message()), '')
 					+ case when isnull(error_line(), 0) <> 0 then ' - Linha: ' + convert(varchar(max),error_line()) else '' end
+	select 'cd_retorno' = @cd_retorno, 'nm_retorno' = @nm_retorno
 end catch
 end

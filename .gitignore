@@ -1,0 +1,21 @@
+# Dependências
+node_modules/
+
+# Arquivos de ambiente
+.env
+
+# Diretórios de cache
+.cache/
+dist/
+build/
+
+# Arquivos de log
+npm-debug.log
+yarn-error.log
+
+# Diretórios e arquivos específicos do editor
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Outros arquivos e diretórios que possam conter informações sensíveis ou desnecessárias

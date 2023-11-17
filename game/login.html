@@ -67,9 +67,56 @@
         <img src="imagens/logo_game_branco_sem_fundologo.png" alt="Logo" class="logo">
         <h1 class="title">Woznext Games</h1>
         <div class="input-box">
-            <input type="text" placeholder="Apelido" class="input-field">
+            <input type="text" placeholder="Apelido" class="input-field" id="apelidoInput">
         </div>
-        <button class="button">Entrar</button>
+        <button class="button" id="submitBtn">Entrar</button>
     </div>
+
+    
+    
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function(event) {
+            event.preventDefault();
+    
+            var apelido = document.getElementById('apelidoInput').value;
+    
+            // Limpar qualquer estado anterior aqui
+            // Por exemplo, fechar popups abertos ou limpar mensagens de erro
+    
+            if (apelido) {
+                var data = {
+                    nm_apelido: apelido
+                };
+    
+                fetch('http://localhost:3000/incluir-apelido', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Adicione um log para ver a resposta da API
+                    // Verificar se cd_retorno é diferente de zero
+                    if (data.cd_retorno !== 0) {
+                        // Mostrar popup de validação
+                        alert(data.nm_retorno); // Exemplo simples com alert
+                    } else {
+                        // Redirecionar para escolher_sala.html
+                        sessionStorage.setItem('apelido', apelido);
+                        window.location.href = 'escolher_sala.html';
+                    }
+                })
+                .catch((error) => {
+                    console.error('Erro:', error);
+                    // Lida com erros da requisição
+                });
+            } else {
+                alert("Por favor, digite um apelido.");
+            }
+        });
+    </script>
+    
 </body>
 </html>

@@ -1,4 +1,12 @@
-if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[t_apelido_jogo_memoria]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+
+if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'dbo.debug') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+    drop table dbo.debug
+create table dbo.debug(
+	nm_campo varchar(max) NULL,
+	vl_campo text NULL,
+	dt_sistema datetime NULL
+)
+if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'dbo.t_apelido_jogo_memoria') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
     drop table dbo.t_apelido_jogo_memoria
 create table dbo.t_apelido_jogo_memoria
 (

@@ -55,6 +55,12 @@ begin try
 
     if @debug = 1
     begin
+        if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[debug]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+        begin
+            select @cd_retorno = 1, @nm_retorno = 'A tabela dbo.debug não existe'
+            return
+        end
+
         insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
         ('@nm_apelido',@nm_apelido,@dt_sistema)
     end
@@ -63,13 +69,20 @@ begin try
     begin
         if isnull(@nm_apelido,'') = ''
         begin
-            select @cd_retorno = 1, @nm_retorno = 'O parâmetro @nm_apelido é obrigatório'
+            select @cd_retorno = 2, @nm_retorno = 'O parâmetro @nm_apelido é obrigatório'
             return
         end
 
+        if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[t_apelido_jogo_memoria]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+        begin
+            select @cd_retorno = 3, @nm_retorno = 'A tabela dbo.t_apelido_jogo_memoria não existe'
+            return
+        end
+
+
         if exists(select top 1 1 from dbo.t_apelido_jogo_memoria t where t.nm_apelido = @nm_apelido and t.fl_ativo = 1)
         begin
-            select @cd_retorno = 2, @nm_retorno = 'O apelido informado já está sendo usado por outro usuário'
+            select @cd_retorno = 4, @nm_retorno = 'O apelido informado já está sendo usado por outro usuário'
             return
         end
 

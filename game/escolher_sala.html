@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="utf-8">
-    <title>Escolher Sala</title>
-    <!-- Adicione seus estilos e scripts aqui -->
+	<meta charset="utf-8">
+	<title>Escolher Sala</title>
+	<!-- Adicione seus estilos e scripts aqui -->
 </head>
 <body>
-    <h1>Bem-vindo à Sala de Escolha!</h1>
-    <p>Apelido: <span id="apelidoDisplay"></span></p>
-    <!-- Outros elementos HTML aqui -->
+	<h1>Bem-vindo à Sala de Escolha!</h1>
+	<p>Apelido: <span id="apelidoDisplay"></span></p>
+	<!-- Outros elementos HTML aqui -->
 
-    <script>
-        window.onload = function() {
-            var apelidoInput = document.getElementById('apelidoInput');
-            if (apelidoInput) {
-                apelidoInput.value = '';
-            }
-        };
+	<script>
+		window.onload = function() {
+			var apelidoInput = document.getElementById('apelidoInput');
+			if (apelidoInput) {
+				apelidoInput.value = '';
+			}
+		};
 
-        window.onload = function() {
-            var apelido = sessionStorage.getItem('apelido');
-            if(apelido) {
-                document.getElementById('apelidoDisplay').textContent = apelido;
-                // Aqui você pode adicionar mais lógica que use a variável apelido
-            } else {
-                // Redirecionar de volta para a página inicial se não houver apelido
-                window.location.href = 'index.html';
-            }
-        };
-    </script>
+		window.onload = function() {
+			var apelido = sessionStorage.getItem('apelido');
+			if(apelido) {
+				document.getElementById('apelidoDisplay').textContent = apelido;
+				// Aqui você pode adicionar mais lógica que use a variável apelido
+			} else {
+				// Redirecionar de volta para a página inicial se não houver apelido
+				window.location.href = 'index.html';
+			}
+		};
+	</script>
 </body>
 </html>

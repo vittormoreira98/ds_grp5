@@ -5,9 +5,9 @@ create procedure dbo.p_virar_carta_jogo_memoria
 (
 	@id_carta					int				= null,
 	@cd_usuario					varchar(100)	= null,
-    @id_partida					int				= null,
+	@id_partida					int				= null,
 	@debug						bit				= null,
-    @fl_virar_carta				bit				= null output,
+	@fl_virar_carta				bit				= null output,
 	@cd_retorno					int				= null output,
 	@nm_retorno					varchar(max)	= null output,
 	@nr_versao_proc				varchar(15)		= null output
@@ -40,11 +40,11 @@ begin try
 	set @nr_versao_proc = ltrim(rtrim(replace(replace('$Revision: 1.0 $','Revision:',''),'$','')))
 	declare @nm_proc varchar(200) = 'dbo.p_virar_carta_jogo_memoria'
 	
-    /*Declarando variaveis internas*/
-    begin
-        declare
-            @dt_sistema datetime = getdate()
-    end
+	/*Declarando variaveis internas*/
+	begin
+		declare
+			@dt_sistema datetime = getdate()
+	end
 
 	insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
 	('linha50','linha50',@dt_sistema),
@@ -53,29 +53,29 @@ begin try
 	('@id_partida',convert(varchar(max),@id_partida),@dt_sistema)
 
 	select @fl_virar_carta = 1
-    /*Pré validações*/
-    begin
-        if @id_carta is null
-        begin
-            select @cd_retorno = 1, @nm_retorno = 'O parâmetro @id_carta é obrigatório'
-            raiserror(@nm_retorno, 16, 1)
-        end
+	/*Pré validações*/
+	begin
+		if @id_carta is null
+		begin
+			select @cd_retorno = 1, @nm_retorno = 'O parâmetro @id_carta é obrigatório'
+			raiserror(@nm_retorno, 16, 1)
+		end
 
-        if @cd_usuario is null
-        begin
-            select @cd_retorno = 2, @nm_retorno = 'O parâmetro @cd_usuario é obrigatório'
-            raiserror(@nm_retorno, 16, 1)
-        end
+		if @cd_usuario is null
+		begin
+			select @cd_retorno = 2, @nm_retorno = 'O parâmetro @cd_usuario é obrigatório'
+			raiserror(@nm_retorno, 16, 1)
+		end
 
-        if @id_partida is null
-        begin
-            select @cd_retorno = 3, @nm_retorno = 'O parâmetro @id_partida é obrigatório'
-            raiserror(@nm_retorno, 16, 1)
-        end
+		if @id_partida is null
+		begin
+			select @cd_retorno = 3, @nm_retorno = 'O parâmetro @id_partida é obrigatório'
+			raiserror(@nm_retorno, 16, 1)
+		end
 
-    end
+	end
 
-    /*Definindo retorno com processamento efetuado com sucesso*/
+	/*Definindo retorno com processamento efetuado com sucesso*/
 	select	@cd_retorno = 0,
 			@nm_retorno = 'Processamento efetuado com sucesso'
 	

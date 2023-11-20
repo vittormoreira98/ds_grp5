@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>teste</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>teste</title>
 </head>
-    <style type="text/css">
+	<style type="text/css">
 body{
-    background-color: #0966ff;
-    margin-left: 250px;
-    margin-right: 250px;
+	background-color: #0966ff;
+	margin-left: 250px;
+	margin-right: 250px;
 }
 div.tela{
-    border: solid black;
-    text-align: center;
-    padding: 100px;
+	border: solid black;
+	text-align: center;
+	padding: 100px;
 }
 img{
-    margin: 25px;
+	margin: 25px;
 }
-    </style>
+	</style>
 <body>
-    <div class="tela">
-    <img src="carta.png" id="inverter1" onclick="troca1()"><img src="carta.png" id="inverter2" onclick="troca2()">
-    <img src="carta.png" id="inverter3" onclick="troca3()"><img src="carta.png" id="inverter4" onclick="troca4()">
-    </div>
+	<div class="tela">
+	<img src="carta.png" id="inverter1" onclick="troca1()"><img src="carta.png" id="inverter2" onclick="troca2()">
+	<img src="carta.png" id="inverter3" onclick="troca3()"><img src="carta.png" id="inverter4" onclick="troca4()">
+	</div>
 
-    <script>
-        let A;
-        let B;
-        let C;
-        let D;
-        
-        function troca1() {
-             A = document.getElementById("inverter1").src = "logo.png"  
-        }
-        function troca2() {
-             B = document.getElementById("inverter2").src = "apple.png"  
-        }
-        function troca3() {
-             C = document.getElementById("inverter3").src = "logo.png"  
-        }
-        function troca4() {
-             D = document.getElementById("inverter4").src = "apple.png"  
-        }
+	<script>
+		let A;
+		let B;
+		let C;
+		let D;
+		
+		function troca1() {
+			 A = document.getElementById("inverter1").src = "logo.png"  
+		}
+		function troca2() {
+			 B = document.getElementById("inverter2").src = "apple.png"  
+		}
+		function troca3() {
+			 C = document.getElementById("inverter3").src = "logo.png"  
+		}
+		function troca4() {
+			 D = document.getElementById("inverter4").src = "apple.png"  
+		}
 
-       if(A == B){
-        setInterval(retorno, 3000);
-        function retorno() {
-            A = document.getElementById("inverter").src = "carta.png"
-            B = document.getElementById("inverter").src = "carta.png"
-        }
-        clearInterval(retorno)
-       }
+	   if(A == B){
+		setInterval(retorno, 3000);
+		function retorno() {
+			A = document.getElementById("inverter").src = "carta.png"
+			B = document.getElementById("inverter").src = "carta.png"
+		}
+		clearInterval(retorno)
+	   }
 
-    </script>
+	</script>
 </body>
 </html>

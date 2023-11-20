@@ -5,7 +5,7 @@ create procedure dbo.p_incluir_apelido_jogo_memoria
 (
 	@nm_apelido					varchar(50)		= null,
 	@debug						bit				= null,
-    @id_apelido					int				= null output,
+	@id_apelido					int				= null output,
 	@cd_retorno					int				= null output,
 	@nm_retorno					varchar(max)	= null output,
 	@nr_versao_proc				varchar(15)		= null output
@@ -37,67 +37,79 @@ begin try
 	set @nr_versao_proc = ltrim(rtrim(replace(replace('$Revision: 1.0 $','Revision:',''),'$','')))
 	declare @nm_proc varchar(200) = 'dbo.p_virar_carta_jogo_memoria'
 	
-    /*Declarando variaveis internas*/
-    begin
-        declare
-            @dt_sistema datetime = getdate()
-    end
-    
-    /*Criação de tabela temporária*/
-    begin
-        if object_id('tempd..#t_apelido_jogo_memoria') is not null
-            drop table #t_apelido_jogo_memoria
-        create table #t_apelido_jogo_memoria
-        (
-            id_apelido					int
-        )
-    end
+	/*Declarando variaveis internas*/
+	begin
+		declare
+			@dt_sistema datetime = getdate()
+	end
+	
+	/*Criação de tabela temporária*/
+	begin
+		if object_id('tempd..#t_apelido_jogo_memoria') is not null
+			drop table #t_apelido_jogo_memoria
+		create table #t_apelido_jogo_memoria
+		(
+			id_apelido					int
+		)
+	end
 
-    if @debug = 1
-    begin
-        if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[debug]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-        begin
-            select @cd_retorno = 1, @nm_retorno = 'A tabela dbo.debug não existe'
-            return
-        end
+	/*Verificando parametros de entrada*/
+	if @debug = 1
+	begin
+		if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[debug]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+		begin
+			select @cd_retorno = 1, @nm_retorno = 'A tabela dbo.debug não existe'
+			return
+		end
 
-        insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
-        ('@nm_apelido',@nm_apelido,@dt_sistema)
-    end
+		insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
+		('@nm_apelido',@nm_apelido,@dt_sistema),
+		('@debug',@debug,@dt_sistema),
+		('@id_apelido',@id_apelido,@dt_sistema),
+		('@cd_retorno',@cd_retorno,@dt_sistema),
+		('@nm_retorno',@nm_retorno,@dt_sistema),
+		('@nr_versao_proc',@nr_versao_proc,@dt_sistema)
+	end
 
-    /*Pré validações*/
-    begin
-        if isnull(@nm_apelido,'') = ''
-        begin
-            select @cd_retorno = 2, @nm_retorno = 'O parâmetro @nm_apelido é obrigatório'
-            return
-        end
+	/*Pré validações*/
+	begin
+		if isnull(@nm_apelido,'') = ''
+		begin
+			select @cd_retorno = 2, @nm_retorno = 'O parâmetro @nm_apelido é obrigatório'
+			return
+		end
 
-        if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[t_apelido_jogo_memoria]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-        begin
-            select @cd_retorno = 3, @nm_retorno = 'A tabela dbo.t_apelido_jogo_memoria não existe'
-            return
-        end
+		if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[t_apelido_jogo_memoria]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+		begin
+			select @cd_retorno = 3, @nm_retorno = 'A tabela dbo.t_apelido_jogo_memoria não existe'
+			return
+		end
 
 
-        if exists(select top 1 1 from dbo.t_apelido_jogo_memoria t where t.nm_apelido = @nm_apelido and t.fl_ativo = 1)
-        begin
-            select @cd_retorno = 4, @nm_retorno = 'O apelido informado já está sendo usado por outro usuário'
-            return
-        end
+		if exists(select top 1 1 from dbo.t_apelido_jogo_memoria t where t.nm_apelido = @nm_apelido and t.fl_ativo = 1)
+		begin
+			select @cd_retorno = 4, @nm_retorno = 'O apelido informado já está sendo usado por outro usuário'
+			return
+		end
 
-    end
+		if not exists (select top 1 1 from dbo.sysobjects where id = object_id(N'[dbo].[t_apelido_jogo_memoria]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+		begin
+			select @cd_retorno = 5, @nm_retorno = 'A tabela dbo.t_apelido_jogo_memoria não existe'
+			return
+		end
+	end
 
-    /*Resultado*/
-    begin
-        insert into dbo.t_apelido_jogo_memoria (nm_apelido,fl_ativo,dt_cadastro,dt_alteracao)
-        output inserted.id_apelido into #t_apelido_jogo_memoria (id_apelido)
-        values (@nm_apelido,1,@dt_sistema,@dt_sistema)
-        
-        select @id_apelido = t.id_apelido from #t_apelido_jogo_memoria t
-    end
+	/*Resultado*/
+	begin
 
-    /*Definindo retorno com processamento efetuado com sucesso*/
+		insert into dbo.t_apelido_jogo_memoria (nm_apelido,fl_ativo,dt_cadastro,dt_alteracao)
+		output inserted.id_apelido into #t_apelido_jogo_memoria (id_apelido)
+		values (@nm_apelido,1,@dt_sistema,@dt_sistema)
+		
+		select @id_apelido = t.id_apelido from #t_apelido_jogo_memoria t
+	end
+
+	/*Definindo retorno com processamento efetuado com sucesso*/
 	select	@cd_retorno = 0,
 			@nm_retorno = 'Processamento efetuado com sucesso'
 

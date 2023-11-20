@@ -1,109 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="imagens/icone.png" type="image/png">
-    <title>Equipe</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            margin: 0;
-            padding: 50px 10%;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="imagens/icone.png" type="image/png">
+	<title>Equipe</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #fff;
+			margin: 0;
+			padding: 50px 10%;
+		}
 
-        h1 {
-            font-size: 36px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
+		h1 {
+			font-size: 36px;
+			margin-bottom: 40px;
+			text-align: center;
+		}
 
-        .equipe {
-            display: flex;
-            justify-content: space-between;
-        }
+		.equipe {
+			display: flex;
+			justify-content: space-between;
+		}
 
-        .membro {
-            flex: 1;
-            text-align: center;
-            margin: 0 10px;
-            position: relative; /* Adicione isso para posicionar absolutamente o overlay */
-        }
+		.membro {
+			flex: 1;
+			text-align: center;
+			margin: 0 10px;
+			position: relative; /* Adicione isso para posicionar absolutamente o overlay */
+		}
 
-        .membro img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            transition: transform 0.3s;
-        }
+		.membro img {
+			width: 200px;
+			height: 200px;
+			border-radius: 50%;
+			transition: transform 0.3s;
+		}
 
-        .membro:hover img {
-            transform: scale(1.1);
-        }
+		.membro:hover img {
+			transform: scale(1.1);
+		}
 
-        .nome {
-            font-size: 18px;
-            margin-top: 10px;
-        }
+		.nome {
+			font-size: 18px;
+			margin-top: 10px;
+		}
 
 
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('imagens/x-vermelho.png') center/92% no-repeat;
-            background-color: transparent;/*rgba(255, 0, 0, 0.5); /* Adicione transparência se desejar */
-        }
+		.overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url('imagens/x-vermelho.png') center/92% no-repeat;
+			background-color: transparent;/*rgba(255, 0, 0, 0.5); /* Adicione transparência se desejar */
+		}
 
-        /* Alternativamente, se você quiser criar um X com CSS em vez de usar uma imagem: */
-        .overlay::before,
-        .overlay::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 220px; /* 110% da largura da imagem, ajuste conforme necessário */
-            height: 20px; /* Espessura do X */
-            background-color: red;
-        }
+		/* Alternativamente, se você quiser criar um X com CSS em vez de usar uma imagem: */
+		.overlay::before,
+		.overlay::after {
+			content: '';
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 220px; /* 110% da largura da imagem, ajuste conforme necessário */
+			height: 20px; /* Espessura do X */
+			background-color: red;
+		}
 
-        .overlay::before {
-            transform: translate(-50%, -50%) rotate(45deg);
-        }
+		.overlay::before {
+			transform: translate(-50%, -50%) rotate(45deg);
+		}
 
-        .overlay::after {
-            transform: translate(-50%, -50%) rotate(-45deg);
-        }
+		.overlay::after {
+			transform: translate(-50%, -50%) rotate(-45deg);
+		}
 
-    </style>
+	</style>
 </head>
 <body>
-    <h1>Equipe</h1>
-    <div class="equipe">
-        <div class="membro">
-            <img src="imagens/carol.png" alt="Carol">
-            <div class="nome">Carol</div>
-        </div>
-        <div class="membro">
-            <img src="imagens/leticia.png" alt="Leticia">
-            <div class="nome">Leticia</div>
-        </div>
-        <div class="membro">
-            <div class="overlay"></div>
-            <img src="imagens/joao.png" alt="João">
-            <div class="nome">João</div>
-        </div>
-        <div class="membro">
-            <img src="imagens/jorge.png" alt="Jorge">
-            <div class="nome">Jorge</div>
-        </div>
-        <div class="membro">
-            <img src="imagens/vitor.png" alt="Vitor">
-            <div class="nome">Vitor</div>
-        </div>
-    </div>
+	<h1>Equipe</h1>
+	<div class="equipe">
+		<div class="membro">
+			<img src="imagens/carol.png" alt="Carol">
+			<div class="nome">Carol</div>
+		</div>
+		<div class="membro">
+			<img src="imagens/leticia.png" alt="Leticia">
+			<div class="nome">Leticia</div>
+		</div>
+		<div class="membro">
+			<div class="overlay"></div>
+			<img src="imagens/joao.png" alt="João">
+			<div class="nome">João</div>
+		</div>
+		<div class="membro">
+			<img src="imagens/jorge.png" alt="Jorge">
+			<div class="nome">Jorge</div>
+		</div>
+		<div class="membro">
+			<img src="imagens/vitor.png" alt="Vitor">
+			<div class="nome">Vitor</div>
+		</div>
+	</div>
 </body>
 </html>

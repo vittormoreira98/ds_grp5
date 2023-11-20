@@ -1,0 +1,236 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #FFFFFF; /* Azul claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #FFFFFF; /* Texto branco */
+}
+.container {
+  background-color: #0966FF; /* Azul claro */
+  width: 80%;
+  max-width: 1000px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 2em;
+}
+header {
+  width: 100%;
+  margin-bottom: 1em; /* Espaço abaixo do cabeçalho */
+}
+
+.header-content {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;
+  width: 100%; /* Ocupa toda a largura do cabeçalho */
+}
+
+header h1 {
+  color: #FFFFFF; /* Texto branco */
+}
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1em;
+}
+.search-input {
+  flex-grow: 1;
+  margin-right: 1em;
+  padding: 0.8em;
+  border-radius: 20px;
+  border: 2px solid #0966FF; /* Borda azul escuro */
+  font-size: 1em;
+  background-color: #FFFFFF; /* Fundo branco */
+  color: #0966FF; /* Texto azul escuro */
+  margin-bottom: 10px; /* Adiciona espaço entre a barra de pesquisa e o botão */
+  width: 96%; /* A barra de pesquisa deve ocupar a largura total */
+  margin-top: 1em; /* Espaço acima da barra de pesquisa */
+}
+.random-room {
+  padding: 0.8em 0.8em;
+  background-color: #0966FF; /* Fundo branco */
+  border: 3px solid #FFFFFF; /* Borda azul escuro */
+  border-radius: 20px;
+  font-size: 1.4em;
+  cursor: pointer;
+  color: #FFFFFF; /* Texto azul escuro */
+  margin-bottom: 10px; /* Adiciona espaço entre o botão e a barra de pesquisa */
+  margin-left: 0;
+}
+.room-list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 2em;
+  font-size: 0.9em; /* Tamanho da fonte menor */
+}
+
+.room-list li {
+  background-color: #FFFFFF; /* Fundo branco */
+  padding: 10px;
+  margin-bottom: 5px; /* Menos espaço entre as linhas */
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0966FF; /* Texto azul escuro */
+  border-bottom: 1px solid #E1E1E1; /* Linha divisória mais sutil */
+}
+
+.room-sala, .room-name, .room-status, .room-occupancy {
+  flex-basis: 20%; /* Divide o espaço igualmente em quatro */
+  font-size: 1.1em;            
+}
+
+.room-sala,.room-name {
+  text-align: left;
+}
+
+.room-status, .room-occupancy {
+  text-align: center;
+}
+.room-status {
+  padding: 0.3em 0.6em;
+  border-radius: 10px;
+  color: #0966FF; /* Texto branco */
+}
+.create-room {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Isso vai criar um espaço entre os elementos da div */
+  margin-bottom: 1em;
+}
+
+.create-room input[type="text"],
+.create-room input[type="number"] {
+  flex-grow: 1; /* Ambos os campos podem crescer igualmente */
+  padding: 10px;
+  border-radius: 20px;
+  border: 2px solid #0966FF;
+  font-size: 1em;
+  background-color: #FFFFFF;
+  color: #0966FF;
+}
+
+.create-room .toggle-switch {
+  /* Mantenha o estilo do toggle-switch como está */
+}
+
+.create-room button {
+  padding: 10px 20px;
+  background-color: #0966FF;
+  border: 3px solid #FFFFFF;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1.4em;
+  color: #FFFFFF;
+  white-space: nowrap; /* Garante que o texto do botão não quebre */
+  flex-shrink: 0; /* O botão não encolhe quando há pouco espaço */
+}
+.toggle-switch {
+  margin-right: 1em;
+}
+.toggle-switch label {
+  background-color: #ccc; /* Fundo cinza para o interruptor desativado */
+  color: #000; /* Texto preto */
+}
+.toggle-switch input:checked + label {
+  background-color: #0966FF; /* Azul para o interruptor ativado */
+  color: #FFFFFF; /* Texto branco */
+}
+/* Adicionando o ícone de jogador e o sinal de '+' no input */
+.create-room input::placeholder {
+  font-family: Arial, sans-serif;
+  color: #0966FF;
+}
+.create-room .player-icon {
+  background: url('path_to_player_icon') no-repeat;
+  background-size: contain;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  margin-right: 1em;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-switch label {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-switch label::after {
+  content: '';
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.toggle-switch input:checked + label {
+  background-color: #2196F3;
+}
+
+.toggle-switch input:checked + label::after {
+  transform: translateX(26px);
+}
+
+.logo {
+  width: 70px;
+  height: 70px;
+}
+/* Estilos adicionados para criar um painel branco em torno da barra de pesquisa e da lista */
+.search-and-list-container {
+  background-color: #FFFFFF; /* Fundo branco */
+  border-radius: 20px; /* Bordas arredondadas */
+  padding: 1em; /* Espaçamento interno */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  margin-bottom: 1em; /* Espaço abaixo do contêiner */
+}
+
+/* Atualize a margem superior do .search-input para remover o espaço extra */
+.search-input {
+  margin-top: 0; /* Remove o espaço extra acima da barra de pesquisa */
+}
+
+/* Centraliza o botão 'Criar sala' horizontalmente */
+.create-room-button-container {
+  display: flex;
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  width: 100%; /* Ocupa toda a largura disponível */
+}
+
+.create-room-button-container button {
+  /* Seus estilos de botão existentes podem permanecer aqui */
+}
+
+/* Estilos para a lista com barra de rolagem */
+.room-list-container {
+  max-height: 200px; /* Ajuste a altura máxima conforme necessário para mostrar 4 itens */
+  overflow-y: auto; /* Habilita a rolagem vertical se o conteúdo exceder a altura máxima */
+  margin-bottom: 1em; /* Espaço abaixo da lista */
+}

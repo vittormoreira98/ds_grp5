@@ -8,7 +8,7 @@ app.use(cors()); // Isso irá habilitar o CORS para todas as rotas e origens
 
 app.use(express.json()); // Para lidar com JSON payloads
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
 	console.log(`Servidor rodando na porta ${port}`);
 });

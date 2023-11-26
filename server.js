@@ -61,6 +61,26 @@ app.post('/incluir-apelido', async (req, res) => {
 	}
 });
 
+app.get('/listar-salas', async (req, res) => {
+    try {
+        const resultado = await sql.query('exec dbo.p_listar_salas_disponiveis');
+        res.json(resultado.recordset);
+    } catch (err) {
+        res.status(500).send({ mensagem: "Erro ao listar salas", erro: err });
+    }
+});
+
+app.post('/entrar-sala', async (req, res) => {
+    const { idSala, idJogador } = req.body;
+    try {
+        const resultado = await sql.query('exec dbo.p_entrar_sala @id_sala, @id_jogador', [idSala, idJogador]);
+        res.json(resultado.recordset);
+    } catch (err) {
+        res.status(500).send({ mensagem: "Erro ao entrar na sala", erro: err });
+    }
+});
+
+
 
 app.post('/virar-carta', async (req, res) => {
 	try {

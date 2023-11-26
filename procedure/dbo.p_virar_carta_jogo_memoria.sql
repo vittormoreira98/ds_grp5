@@ -88,6 +88,6 @@ begin catch
 					+ case when @nm_proc <> isnull(error_procedure(),@nm_proc) then 'Erro na procedure: ' + error_procedure() else '' end
 					+ 'Mensagem: ' + isnull(convert(varchar(300), error_message()), '')
 					+ case when isnull(error_line(), 0) <> 0 then ' - Linha: ' + convert(varchar(max),error_line()) else '' end
-	select 'cd_retorno' = @cd_retorno, 'nm_retorno' = @nm_retorno
+	
 end catch
 end

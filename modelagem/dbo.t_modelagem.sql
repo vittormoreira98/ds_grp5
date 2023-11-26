@@ -28,3 +28,12 @@ create table dbo.t_sala_jogo_memoria
 	dt_cadastro					datetime		not null	default(getdate()),
 	dt_alteracao				datetime		not null	default(getdate())
 )
+if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'dbo.t_apelido_sala') and objectproperty(id, N'IsUserTable') = 1)
+	drop table dbo.t_apelido_sala
+create table dbo.t_apelido_sala
+(
+	id_apelido_sala				int				identity(1,1)	not null,
+	id_apelido					int				not null,
+	id_sala						int				not null,
+	dt_cadastro					datetime		not null	default(getdate())
+)

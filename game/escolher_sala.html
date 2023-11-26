@@ -1,80 +1,110 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salas - Woznext Games</title>
-    <link rel="stylesheet" href="css/sala.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Salas - Woznext Games</title>
+	<link rel="stylesheet" href="css/sala.css">
+	<script>
+		// Função para listar salas disponíveis
+		async function listarSalasDisponiveis() {
+			try {
+				const resposta = await fetch('/listar-salas');
+				const salas = await resposta.json();
+				// Lógica para exibir as salas na página
+			} catch (err) {
+				console.error('Erro ao listar salas:', err);
+			}
+		}
+
+		// Função para entrar em uma sala
+		async function entrarSala(idSala, idJogador) {
+			try {
+				const resposta = await fetch('/entrar-sala', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ idSala, idJogador })
+				});
+				const resultado = await resposta.json();
+				// Lógica após entrar na sala
+			} catch (err) {
+				console.error('Erro ao entrar na sala:', err);
+			}
+		}
+
+	</script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-content">
-                <!-- Substitua 'path_to_logo_image' pelo caminho correto para a imagem do logotipo -->
-                <!--<img src="path_to_logo_image" alt="Logo" class="logo">-->
-                <button class="random-room">Sala aleatória</button>
-            </div>
-        </header>
-        
-        <div class="search-and-list-container">
-            <input type="text" class="search-input" placeholder="Pesquisar sala">
-            <div class="room-list-container"> <!-- Contêiner com barra de rolagem -->
-                <ul class="room-list">
-                    <li>
-                        <div class="room-sala">Sala 1</div>
-                        <div class="room-name">Steve Jobs</div>
-                        <div class="room-status">PRIVADO</div>
-                        <div class="room-occupancy">5/8</div>
-                    </li>
-                    <li>
-                        <div class="room-sala">Sala 2</div>
-                        <div class="room-name">Microsoft</div>
-                        <div class="room-status">ABERTA</div>
-                        <div class="room-occupancy">8/8</div>
-                    </li>
-                    <li>
-                        <div class="room-sala">Sala 3</div>
-                        <div class="room-name">Xerox</div>
-                        <div class="room-status">PRIVADO</div>
-                        <div class="room-occupancy">3/8</div>
-                    </li>
-                    <li>
-                        <div class="room-sala">Sala 4</div>
-                        <div class="room-name">IBM</div>
-                        <div class="room-status">ABERTA</div>
-                        <div class="room-occupancy">7/8</div>
-                    </li>
-                    <li>
-                        <div class="room-sala">Sala 5</div>
-                        <div class="room-name">Bill Gates</div>
-                        <div class="room-status">ABERTA</div>
-                        <div class="room-occupancy">4/8</div>
-                    </li>
-                    <li>
-                        <div class="room-sala">Sala 6</div>
-                        <div class="room-name">Wozniack</div>
-                        <div class="room-status">ABERTA</div>
-                        <div class="room-occupancy">1/2</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-       
-        </br></br>
-        <div class="create-room">
-            <input type="text" placeholder="Digite o nome da sala">
-            <input type="number" placeholder="Jogadores" min="1" max="8"> <!-- Campo para número de jogadores -->
-            <div class="toggle-switch">
-                <input type="checkbox" id="room-toggle">
-                <label for="room-toggle"></label>
-            </div>
-            <span>SALA ABERTA</span>
-        </div>
-        <div class="create-room-button-container">
-            <div class="create-room">
-                <button>Criar sala</button>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<header>
+			<div class="header-content">
+				<!-- Substitua 'path_to_logo_image' pelo caminho correto para a imagem do logotipo -->
+				<!--<img src="path_to_logo_image" alt="Logo" class="logo">-->
+				<button class="random-room">Sala aleatória</button>
+			</div>
+		</header>
+		
+		<div class="search-and-list-container">
+			<input type="text" class="search-input" placeholder="Pesquisar sala">
+			<div class="room-list-container"> <!-- Contêiner com barra de rolagem -->
+				<ul class="room-list">
+					<li>
+						<div class="room-sala">Sala 1</div>
+						<div class="room-name">Steve Jobs</div>
+						<div class="room-status">PRIVADO</div>
+						<div class="room-occupancy">5/8</div>
+					</li>
+					<li>
+						<div class="room-sala">Sala 2</div>
+						<div class="room-name">Microsoft</div>
+						<div class="room-status">ABERTA</div>
+						<div class="room-occupancy">8/8</div>
+					</li>
+					<li>
+						<div class="room-sala">Sala 3</div>
+						<div class="room-name">Xerox</div>
+						<div class="room-status">PRIVADO</div>
+						<div class="room-occupancy">3/8</div>
+					</li>
+					<li>
+						<div class="room-sala">Sala 4</div>
+						<div class="room-name">IBM</div>
+						<div class="room-status">ABERTA</div>
+						<div class="room-occupancy">7/8</div>
+					</li>
+					<li>
+						<div class="room-sala">Sala 5</div>
+						<div class="room-name">Bill Gates</div>
+						<div class="room-status">ABERTA</div>
+						<div class="room-occupancy">4/8</div>
+					</li>
+					<li>
+						<div class="room-sala">Sala 6</div>
+						<div class="room-name">Wozniack</div>
+						<div class="room-status">ABERTA</div>
+						<div class="room-occupancy">1/2</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	
+		</br></br>
+		<div class="create-room">
+			<input type="text" placeholder="Digite o nome da sala">
+			<input type="number" placeholder="Jogadores" min="1" max="8"> <!-- Campo para número de jogadores -->
+			<div class="toggle-switch">
+				<input type="checkbox" id="room-toggle">
+				<label for="room-toggle"></label>
+			</div>
+			<span>SALA ABERTA</span>
+		</div>
+		<div class="create-room-button-container">
+			<div class="create-room">
+				<button>Criar sala</button>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

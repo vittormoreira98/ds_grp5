@@ -57,7 +57,7 @@ begin try
 			return;
 		end
 
-		if @capacidadeatual >= (select nr_apelidoes from dbo.t_sala_jogo_memoria where id_sala = @id_sala)
+		if @capacidadeatual >= (select nr_jogadores from dbo.t_sala_jogo_memoria where id_sala = @id_sala)
 		begin
 			set @cd_retorno = 14;
 			set @nm_retorno = 'Sala cheia.';

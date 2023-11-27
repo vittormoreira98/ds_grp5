@@ -23,6 +23,7 @@ create table dbo.t_sala_jogo_memoria
 	id_sala						int				identity(1,1)	not null,
 	nm_sala						varchar(50)		not null,
 	nr_jogadores				int				not null,
+	nr_jogadores_atuais			int				not null	default(0),
 	fl_sala_aberta				bit				not null,
 	fl_ativo					bit				not null	default(1),
 	dt_cadastro					datetime		not null	default(getdate()),

@@ -97,7 +97,6 @@
 				})
 				.then(response => response.json())
 				.then(data => {
-					console.log(data); // Adicione um log para ver a resposta da API
 					// Verificar se cd_retorno é diferente de zero
 					if (data.cd_retorno !== 0) {
 						// Mostrar popup de validação
@@ -105,6 +104,7 @@
 					} else {
 						// Redirecionar para escolher_sala.html
 						sessionStorage.setItem('apelido', apelido);
+						sessionStorage.setItem('idApelido', data.id_apelido);
 						window.location.href = 'escolher_sala.html';
 					}
 				})

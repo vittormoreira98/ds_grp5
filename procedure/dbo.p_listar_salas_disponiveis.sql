@@ -33,12 +33,11 @@ begin try
 	declare @nm_proc varchar(200) = 'dbo.p_listar_salas_disponiveis';
 
 	select
-		t.id_sala, t.nm_sala, t.nr_jogadores
+		t.id_sala, t.nm_sala, t.nr_jogadores, t.fl_sala_aberta, t.nr_jogadores_atuais
 	from
 		dbo.t_sala_jogo_memoria t
 	where
-		t.fl_sala_aberta = 1
-		and t.fl_ativo = 1;
+		t.fl_ativo = 1;
 
 	select	@cd_retorno = 0,
 			@nm_retorno = 'Salas listadas com sucesso';

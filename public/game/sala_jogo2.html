@@ -1,0 +1,102 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Memory Game Interface
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: 'Roboto', sans-serif;
+        }
+  </style>
+ </head>
+ <body class="bg-blue-500 flex items-center justify-center h-screen overflow-hidden">
+  <div class="bg-blue-700 p-10 rounded-lg flex flex-col items-center justify-center" style="width: 1200px; height: 650px;">
+   <div class="flex justify-between w-full">
+    <div class="bg-blue-800 text-white p-5 rounded-lg">
+     <h2 class="font-bold text-2xl mb-4">
+      Sala Microsoft
+     </h2>
+     <div class="space-y-4">
+      <div class="flex items-center">
+       <span class="font-bold text-lg mr-2">
+        1º
+       </span>
+       <div class="bg-white rounded p-2 w-32 text-black">
+        João
+       </div>
+      </div>
+      <div class="flex items-center">
+       <span class="font-bold text-lg mr-2">
+        2º
+       </span>
+       <div class="bg-white rounded p-2 w-32 text-black">
+        Silvio
+       </div>
+      </div>
+      <div class="flex items-center">
+       <span class="font-bold text-lg mr-2">
+        3º
+       </span>
+       <div class="bg-white rounded p-2 w-32 text-black">
+        Lucas
+       </div>
+      </div>
+      <div class="flex items-center">
+       <span class="font-bold text-lg mr-2">
+        4º
+       </span>
+       <div class="bg-white rounded p-2 w-32 text-black">
+        Leticia
+       </div>
+      </div>
+     </div>
+     <div class="mt-6">
+      <div class="flex items-center mb-2">
+       <span class="font-bold text-lg mr-2">
+        Tempo restante:
+       </span>
+       <div class="flex items-center justify-center bg-blue-900 rounded-full w-12 h-12">
+        <i class="fas fa-clock text-white text-lg">
+        </i>
+       </div>
+       <span class="font-bold text-lg ml-2">
+        1:00
+       </span>
+      </div>
+      <div class="flex items-center">
+       <span class="font-bold text-lg mr-2">
+        Pontuação atual:
+       </span>
+       <span class="font-bold text-lg">
+        75
+       </span>
+      </div>
+     </div>
+     <button class="mt-6 bg-blue-900 text-white font-bold py-2 px-4 rounded w-full">
+      Sair
+     </button>
+    </div>
+    <div class="grid grid-cols-5 gap-4">
+     <!-- Repeat for each card, 5 columns and 4 rows -->
+     <!-- Placeholder for 20 cards -->
+     <div class="bg-white rounded-lg p-4 flex justify-center items-center">
+      <img alt="Placeholder image of a memory card with a cube icon" class="w-16 h-16" height="64" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-tMdIOvUCzARJq2scdT6jO0Q9.png?st=2023-11-29T02%3A12%3A55Z&amp;se=2023-11-29T04%3A12%3A55Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A12%3A19Z&amp;ske=2023-11-29T20%3A12%3A19Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=AGr5ZPrHbEvjawNrMoLESr%2B1q5NoDhH8wfzO6YeK0Dk%3D" width="64"/>
+     </div>
+     <!-- ... repeat for a total of 20 cards ... -->
+     <div class="bg-white rounded-lg p-4 flex justify-center items-center">
+      <img alt="Placeholder image of a memory card with a cube icon" class="w-16 h-16" height="64" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-tMdIOvUCzARJq2scdT6jO0Q9.png?st=2023-11-29T02%3A12%3A55Z&amp;se=2023-11-29T04%3A12%3A55Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A12%3A19Z&amp;ske=2023-11-29T20%3A12%3A19Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=AGr5ZPrHbEvjawNrMoLESr%2B1q5NoDhH8wfzO6YeK0Dk%3D" width="64"/>
+     </div>
+     <!-- ... and so on until 20 cards are displayed ... -->
+    </div>
+   </div>
+   <div class="absolute bottom-10 left-10">
+    <img alt="Placeholder image of a colorful cube with the word 'NEXT' on it" class="w-24 h-24" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-9x7rPRI7s5TnZXOBeYpxGmmp.png?st=2023-11-29T02%3A12%3A55Z&amp;se=2023-11-29T04%3A12%3A55Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T10%3A18%3A41Z&amp;ske=2023-11-29T10%3A18%3A41Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=t4Bw2pW2gj0LuL7vepgJXUt0e7wR7iVavTtOlkmrdq4%3D" width="100"/>
+   </div>
+  </div>
+ </body>
+</html>

@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-blue-500 flex items-center justify-center h-screen overflow-hidden">
+    <div class="bg-blue-700 p-10 rounded-lg flex flex-col items-center justify-center" style="width: 1200px; height: 650px;">
+        <div class="flex justify-between w-full">
+            <div class="bg-blue-800 text-white p-5 rounded-lg">
+                <h2 class="font-bold text-2xl mb-4">Sala Microsoft</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <span class="font-bold text-lg mr-2">1º</span>
+                        <div class="bg-white rounded p-2 w-32 text-black">João</div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-bold text-lg mr-2">2º</span>
+                        <div class="bg-white rounded p-2 w-32 text-black">Silvio</div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-bold text-lg mr-2">3º</span>
+                        <div class="bg-white rounded p-2 w-32 text-black">Lucas</div>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-bold text-lg mr-2">4º</span>
+                        <div class="bg-white rounded p-2 w-32 text-black">Leticia</div>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <div class="flex items-center mb-2">
+                        <span class="font-bold text-lg mr-2">Tempo restante:</span>
+                        <div class="flex items-center justify-center bg-blue-900 rounded-full w-12 h-12">
+                            <i class="fas fa-clock text-white text-lg"></i>
+                        </div>
+                        <span class="font-bold text-lg ml-2">1:00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="font-bold text-lg mr-2">Pontuação atual:</span>
+                        <span class="font-bold text-lg">75</span>
+                    </div>
+                </div>
+                <button class="mt-6 bg-blue-900 text-white font-bold py-2 px-4 rounded w-full">Sair</button>
+            </div>
+            <div class="grid grid-cols-6 gap-4">
+                <!-- Repeat for each card -->
+                <div class="bg-white rounded-lg p-4 flex justify-center items-center">
+                    <img alt="Placeholder image of a memory card with a cube icon" class="w-16 h-16" src="https://placehold.co/64x64.png" />
+                </div>
+                <!-- ... repeat for a total of 18 cards ... -->
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-10">
+            <img alt="Placeholder image of a colorful cube with the word 'NEXT' on it" class="w-24 h-24" src="https://placehold.co/100x100.png" />
+        </div>
+    </div>
+</body>
+</html>

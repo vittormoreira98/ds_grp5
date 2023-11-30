@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Woznext Games</title>
+	<link rel="icon" href="imagens/icone.png" type="image/png">
+	<style>
+		body, html {
+			margin-top: 1%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: 'Inter', sans-serif;
+			background-color: white; /* A cor de fundo azul conforme o mockup */
+		}
+		.container {
+			width: 1450px; /* Largura do container baseado na imagem */
+			height: 480px;
+			background: #0966FF;
+			border-radius: 15px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px; /* Espaçamento entre elementos */
+            display: flex;
+            /* justify-content: space-around; */
+		}
+		.logo {
+			width: 200px; /* Tamanho do logo baseado na imagem */
+		}
+		.title {
+			color: white; /* Cor azul do título */
+			font-size: 34px; /* Tamanho da fonte do título */
+			text-align: center;
+			padding: 0px;
+		}
+		.input-box {
+			width: 40%;
+			padding: 10px;
+			text-align: center;
+		}
+		.input-field {
+			width: 80%;
+			text-align: center;
+			padding: 10px;
+			border-radius: 20px;
+			border: 2px solid #ced4da; /* Cor da borda do campo de input */
+			font-size: 26px; /* Tamanho da fonte do input */
+			color: #495057; /* Cor do texto do input */
+		}
+		.button {
+			width: 40%;
+			padding: 0px;
+			border-radius: 20px;
+			border: none;
+			background: transparent; /* Cor de fundo do botão azul */
+			color: white;
+			font-size: 34px; /* Tamanho da fonte do botão */
+			cursor: pointer;
+			border: 2px solid white; /* Cor da borda do botão */
+		}
+		
+		img{
+			margin: 20px;
+            width: 105px;
+            height: 120px;
+		}
+        
+		div.pontuacao{
+			/* border: solid white; */
+			text-align: center;
+			padding: 50px;
+            border: solid white;
+		}
+		div.cartas{
+			/* border: solid white; */
+			text-align: center;
+            /* margin-left: 300px; */
+		}
+        div.resumo{
+            color: WHITE;
+            text-align: center;
+            margin-right: 0px;
+        }
+	</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+	<div class="container">
+		<table>
+            <tr>
+                <td>
+                    <div class="resumo">
+                        <h2 id="tempo">Tempo Restante
+                            <!-- Aqui vai um cronometro que vai de 1 minuto no formato 01:00 até 0 segundo, regredindo de 1 em 1 segundo, a partir do carregamento da pagima-->
+                            <div id="cronometro"></div>
+                        </h2>
+                        </br></br>
+                        <h2 id="pontuacao">Pontuação
+                        <div id="pontos"></div></h2>
+                    </div>
+                </td>
+                
+                <td>
+                    <div class="cartas">
+                        <img src="imagens_memoria/carta.png" id="c1" onclick="vira('c1')"><img src="imagens_memoria/carta.png" id="c2" onclick="vira('c2')">
+                        <img src="imagens_memoria/carta.png" id="c3" onclick="vira('c3')"><img src="imagens_memoria/carta.png" id="c4" onclick="vira('c4')">
+                        <img src="imagens_memoria/carta.png" id="c5" onclick="vira('c5')"><img src="imagens_memoria/carta.png" id="c6" onclick="vira('c6')">
+                    </br>
+                        <img src="imagens_memoria/carta.png" id="c7" onclick="vira('c7')"><img src="imagens_memoria/carta.png" id="c8" onclick="vira('c8')">
+                        <img src="imagens_memoria/carta.png" id="c9" onclick="vira('c9')"><img src="imagens_memoria/carta.png" id="c10" onclick="vira('c10')">
+                        <img src="imagens_memoria/carta.png" id="c11" onclick="vira('c11')"><img src="imagens_memoria/carta.png" id="c12" onclick="vira('c12')">
+                    </br>
+                        <img src="imagens_memoria/carta.png" id="c13" onclick="vira('c13')"><img src="imagens_memoria/carta.png" id="c14" onclick="vira('c14')">
+                        <img src="imagens_memoria/carta.png" id="c15" onclick="vira('c15')"><img src="imagens_memoria/carta.png" id="c16" onclick="vira('c16')">
+                        <img src="imagens_memoria/carta.png" id="c17" onclick="vira('c17')"><img src="imagens_memoria/carta.png" id="c18" onclick="vira('c18')">
+                    </br>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+	</div>
+
+	
+	
+	<script>
+        let time = 90; // Tempo inicial em segundos
+        const cronometroDiv = document.getElementById('cronometro');
+
+        const intervalId = setInterval(() => {
+            time--;
+            const minutes = Math.floor(time / 90);
+            const seconds = time % 90;
+            cronometroDiv.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+            if (time <= 0) {
+                clearInterval(intervalId);
+            }
+        }, 1000);
+
+        function vira(carta) {
+            let teste= '';
+        }
+        let pontos = 1000; // Pontuação inicial
+        const pontosDiv = document.getElementById('pontos');
+
+        const intervalId2 = setInterval(() => {
+            pontos--;
+            pontosDiv.textContent = `${pontos}`;
+
+            if (pontos <= 0) {
+                clearInterval(intervalId2);
+            }
+        }, 90);
+	</script>
+	
+</body>
+</html>

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Curiosidades</title>
 	<link rel="icon" href="imagens/icone.png" type="image/png">
 	<style>
-		body, html {
+		body,
+		html {
 			margin: 0;
 			padding: 0;
 			height: 100%;
@@ -31,11 +33,17 @@
 		}
 
 		.content-container {
-			position: relative; /* Added position relative here */
+			position: relative;
+			/* Added position relative here */
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			margin-bottom: 40px; /* Add margin to separate the content containers */
+			margin-bottom: 40px;
+			/* Add margin to separate the content containers */
+			max-width: 900px;
+			/* Defina a largura máxima desejada */
+			margin: 0 auto;
+			/* Centralize o contêiner na página */
 		}
 
 		.box {
@@ -45,24 +53,40 @@
 			padding: 20px;
 			flex: 1;
 			text-align: justify;
-			position: relative; /* Add position relative here */
-			z-index: 0; /* Higher z-index to keep text above the circle */
+			position: relative;
+			/* Add position relative here */
+			z-index: 0;
+			/* Higher z-index to keep text above the circle */
 		}
-		
+
 		.box p {
 			margin: 20px;
 		}
+
 		.circle {
-			background-color: #808080;
 			width: 170px;
 			height: 170px;
-			border-radius: 50%;
+			border-radius: 100%;
 			margin-left: 95%;
 			margin-right: 95%;
-			position: absolute; /* Changed to absolute */
-			top: 50%; /* Center the circle vertically */
-			transform: translateY(-50%); /* Adjust vertical alignment */
-			z-index: 1; /* Lower z-index to keep the circle below the text */
+			position: absolute;
+			/* Changed to absolute */
+			top: 50%;
+			/* Center the circle vertically */
+			transform: translateY(-50%);
+			/* Adjust vertical alignment */
+			z-index: 15;
+			/* Lower z-index to keep the circle below the text */
+		}
+
+		.content-container .circle img {
+			border-radius: 50%;
+			max-width: 100%;
+			/* Ajuste a largura máxima da imagem */
+			height: auto;
+			/* Faça com que a altura seja ajustada automaticamente */
+			margin: 0px;
+			/* Adicione margens ao redor da imagem */
 		}
 
 		/* Adjust the left or right position depending on the circle location */
@@ -78,9 +102,12 @@
 			.content-container {
 				flex-direction: column;
 			}
+
 			.content-container .circle {
-				position: static; /* Reset position on small screens */
-				margin: 20px 0; /* Add some margin for spacing */
+				position: static;
+				/* Reset position on small screens */
+				margin: 20px 0;
+				/* Add some margin for spacing */
 			}
 		}
 
@@ -89,65 +116,87 @@
 		}
 	</style>
 </head>
+
 <body>
 	<header>
 		<h1>Curiosidades</h1>
 	</header>
 	<main class="main"> <!-- Corrected missing class here -->
-		<div class="content-container">
-			<section class="box">
-				<p>Steve Wozniak, encontrou inspiração no personagem Tom Swift, protagonista de uma série de livros para jovens.<br>
-				Assim como Tom Swift, Wozniak abraçou uma paixão pela ciência, invenções e tecnologia desde jovem </p>
-			</section>
-			<div class="circle"></div>
-		</div>
-		<div class="content-container">
-			<div class="circle"><img scr="imagens/tomswift.jpg " height="100px" width="150px">
 
+		<div class="content-container">
+			<section class="box">
+				<p>Steve Wozniak, encontrou inspiração no personagem Tom Swift, protagonista de uma série de livros para
+					jovens. Assim como Tom Swift, Wozniak abraçou uma paixão pela ciência, invenções e tecnologia desde jovem.
+				</p>
+			</section>
+			<div class="circle"><img src="imagens/tomswift.png" alt="Tom Swift Image" height="170px" width="170px">
 			</div>
-			<section class="box">
-				<p>O Wozniak apareceu em The Big Bang Theory no segundo epsodio da quarta temporada </p>
-			</section>
 		</div>
+
 		<div class="content-container">
 			<section class="box">
-				<p>Steve Wozniak, despreza o dinheiro e a grande acumulação de riqueza. Ele afirmou que não quer estar perto do dinheiro <br>
-				porque pode corromper seus valores. <br>
-				Quando a Apple abriu o capital, Wozniak ofereceu aos primeiros funcionários da Apple US$ 10 milhões em ações.</p>
+				<p>O Wozniak fez uma participação especial no segundo episodio da quarta temporada de The Big Bang
+					Theory.</p>
 			</section>
-			<div class="circle"></div>
+			<div class="circle"><img src="imagens/thebigbang.png" alt="Tom Swift Image" height="170px" width="170px">
+			</div>
 		</div>
-		<div class="content-container">
-			<div class="circle"></div>
-			<section class="box">
-			<p> Woz foi expulso da Universidade do Colorado Boulder em seu primeiro ano por hackear o sistema de computadores da escola </p>
-			</section>
-		</div>
+
 		<div class="content-container">
 			<section class="box">
-				<p>Steve Wozniak é conhecido por seu envolvimento em atividades filantrópicas,<br>
-				incluindo apoio à educação, bolsas de estudo STEM e participação em organizações de caridade. </p>
+				<p>Steve Wozniak, já comentou diversas vezes sobre o desprezo com o dinheiro e como a riqueza corrompe
+					as pessoas. Quando a Apple abriu o capital, Wozniak ofereceu aos primeiros funcionários da Apple US$ 10 milhões
+					em ações.</p>
 			</section>
-			<div class="circle"></div>
+			<div class="circle"><img src="imagens/acoesdaapple.png" alt="Tom Swift Image" height="170px" width="170px">
+			</div>
 		</div>
-		<div class="content-container">
-			<div class="circle"></div>
-			<section class="box">
-				<p> O Valor pago na Logo da Next computers foi 100.000 dolares, ela foi criada por Paul Rand que fez logos para empresas renomadas como Ford, IBM e ABC. </p>
-			</section>
-		</div>
+
 		<div class="content-container">
 			<section class="box">
-				<p>Gabinete possuia a cor preta, cada molde do gabinete preto custou 650.000 pela exigencia de jobs que o angulo fossem de 90° exatos </p>
+				<p> Woz foi expulso da Universidade do Colorado Boulder em seu primeiro ano por hackear o sistema de
+					computadores da escola.</p>
 			</section>
-			<div class="circle"></div>
+			<div class="circle"><img src="imagens/universidadeboulder.png" alt="Tom Swift Image" height="170px"
+					width="170px"></div>
 		</div>
+
 		<div class="content-container">
-			<div class="circle"></div>
 			<section class="box">
-				<p>vendas da Next - 50.000 computadores por US$ 6.500 -> faturamento bruto de 325.000.000</p>
+				<p>Steve Wozniak é conhecido por seu envolvimento em atividades filantrópicas, incluindo apoio à educação, bolsas de estudo STEM e participação em organizações de caridade. </p>
 			</section>
+			<div class="circle"><img src="imagens/steveensinando.png" alt="Tom Swift Image" height="170px"
+					width="170px"></div>
+		</div>
+
+		<div class="content-container">
+			<section class="box">
+				<p> O Valor pago na Logo da Next computers foi 100.000 dolares, criada por Paul Rand que fez logos para
+					empresas renomadas como Ford, IBM e ABC. </p>
+			</section>
+			<div class="circle"><img src="imagens/paulrand.png" alt="Tom Swift Image" height="170px" width="170px">
+			</div>
+		</div>
+
+		<div class="content-container">
+			<section class="box">
+				<p>Diferente do habitual os gabinetes da Next possuiam a cor preta, cada molde do gabinete preto custou
+					650.000 pela exigencia de jobs que o ângulo fossem de 90° exatos. </p>
+			</section>
+			<div class="circle"><img src="imagens/corpretadonext.png" alt="Tom Swift Image" height="170px"
+					width="170px"></div>
+		</div>
+
+		<div class="content-container">
+			<section class="box">
+				<p>O total de vendas da Next foi de 50.000 computadores (US$ 6.500 cada), com faturamento bruto de
+					325.000.000.</p>
+			</section>
+			<div class="circle"><img src="imagens/tomswift.png" alt="Tom Swift Image" height="170px" width="170px">
+			</div>
+
 		</div>
 	</main>
 </body>
+
 </html>

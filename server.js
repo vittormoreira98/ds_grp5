@@ -174,35 +174,53 @@ app.post('/cadastrar-sala', async (req, res) => {
     }
 });
 
+//app.post('/virar-carta', async (req, res) => {
+//	try {
+
+//		const request = new sql.Request();
+
+//		// Configurar os parâmetros de entrada
+//		request.input('id_carta', sql.Int, req.body.id_carta);
+//		request.input('cd_usuario', sql.VarChar(100), req.body.cd_usuario);
+//		request.input('id_partida', sql.Int, req.body.id_partida);
+
+//		// Configurar os parâmetros de saída
+//		request.output('fl_virar_carta', sql.Bit);
+//		request.output('cd_retorno', sql.Int);
+//		request.output('nm_retorno', sql.VarChar(sql.MAX));
+//		request.output('nr_versao_proc', sql.VarChar(15));
+
+//		// Executar a stored procedure
+//		const result = await request.execute('dbo.p_virar_carta_jogo_memoria');
+
+//		// Capturar os valores dos parâmetros de saída
+//		res.json({
+//			fl_virar_carta: result.output.fl_virar_carta,
+//			cd_retorno: result.output.cd_retorno,
+//			nm_retorno: result.output.nm_retorno,
+//			nr_versao_proc: result.output.nr_versao_proc
+//		});
+//	} catch (err) {
+//		res.status(500).send(err.message);
+//	}
+//});
+
 app.post('/virar-carta', async (req, res) => {
-	try {
+    const { id_carta, id_apelido, id_sala } = req.body;
 
-		const request = new sql.Request();
+    try {
+        const request = new sql.Request();
+        request.input('id_carta', sql.Int, id_carta);
+        request.input('id_apelido', sql.Int, id_apelido);
+        request.input('id_sala', sql.Int, id_sala);
 
-		// Configurar os parâmetros de entrada
-		request.input('id_carta', sql.Int, req.body.id_carta);
-		request.input('cd_usuario', sql.VarChar(100), req.body.cd_usuario);
-		request.input('id_partida', sql.Int, req.body.id_partida);
-
-		// Configurar os parâmetros de saída
-		request.output('fl_virar_carta', sql.Bit);
-		request.output('cd_retorno', sql.Int);
-		request.output('nm_retorno', sql.VarChar(sql.MAX));
-		request.output('nr_versao_proc', sql.VarChar(15));
-
-		// Executar a stored procedure
-		const result = await request.execute('dbo.p_virar_carta_jogo_memoria');
-
-		// Capturar os valores dos parâmetros de saída
-		res.json({
-			fl_virar_carta: result.output.fl_virar_carta,
-			cd_retorno: result.output.cd_retorno,
-			nm_retorno: result.output.nm_retorno,
-			nr_versao_proc: result.output.nr_versao_proc
-		});
-	} catch (err) {
-		res.status(500).send(err.message);
-	}
+        const resultado = await request.execute('dbo.p_virar_carta_jogo_memoria');
+        console.log(resultado.recordset); // Adicione este log para ver a resposta da stored procedure
+        res.json(resultado.recordset || {}); // Garanta que está enviando um JSON válido
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: err.message });
+    }
 });
 
 app.post('/iniciar-jogo', async (req, res) => {

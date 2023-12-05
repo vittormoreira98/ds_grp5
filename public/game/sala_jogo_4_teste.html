@@ -105,17 +105,17 @@
                 
                 <td>
                     <div class="cartas">
-                        <img src="imagens_memoria/carta.png" id="c1" onclick="vira('c1')"><img src="imagens_memoria/carta.png" id="c2" onclick="vira('c2')">
-                        <img src="imagens_memoria/carta.png" id="c3" onclick="vira('c3')"><img src="imagens_memoria/carta.png" id="c4" onclick="vira('c4')">
-                        <img src="imagens_memoria/carta.png" id="c5" onclick="vira('c5')"><img src="imagens_memoria/carta.png" id="c6" onclick="vira('c6')">
+                        <img src="imagens_memoria/carta.png" id="c1" onclick="vira('1')"><img src="imagens_memoria/carta.png" id="c2" onclick="vira('2')">
+                        <img src="imagens_memoria/carta.png" id="c3" onclick="vira('3')"><img src="imagens_memoria/carta.png" id="c4" onclick="vira('4')">
+                        <img src="imagens_memoria/carta.png" id="c5" onclick="vira('5')"><img src="imagens_memoria/carta.png" id="c6" onclick="vira('6')">
                     </br>
-                        <img src="imagens_memoria/carta.png" id="c7" onclick="vira('c7')"><img src="imagens_memoria/carta.png" id="c8" onclick="vira('c8')">
-                        <img src="imagens_memoria/carta.png" id="c9" onclick="vira('c9')"><img src="imagens_memoria/carta.png" id="c10" onclick="vira('c10')">
-                        <img src="imagens_memoria/carta.png" id="c11" onclick="vira('c11')"><img src="imagens_memoria/carta.png" id="c12" onclick="vira('c12')">
+                        <img src="imagens_memoria/carta.png" id="c7" onclick="vira('7')"><img src="imagens_memoria/carta.png" id="c8" onclick="vira('8')">
+                        <img src="imagens_memoria/carta.png" id="c9" onclick="vira('9')"><img src="imagens_memoria/carta.png" id="c10" onclick="vira('10')">
+                        <img src="imagens_memoria/carta.png" id="c11" onclick="vira('11')"><img src="imagens_memoria/carta.png" id="c12" onclick="vira('12')">
                     </br>
-                        <img src="imagens_memoria/carta.png" id="c13" onclick="vira('c13')"><img src="imagens_memoria/carta.png" id="c14" onclick="vira('c14')">
-                        <img src="imagens_memoria/carta.png" id="c15" onclick="vira('c15')"><img src="imagens_memoria/carta.png" id="c16" onclick="vira('c16')">
-                        <img src="imagens_memoria/carta.png" id="c17" onclick="vira('c17')"><img src="imagens_memoria/carta.png" id="c18" onclick="vira('c18')">
+                        <img src="imagens_memoria/carta.png" id="c13" onclick="vira('13')"><img src="imagens_memoria/carta.png" id="c14" onclick="vira('14')">
+                        <img src="imagens_memoria/carta.png" id="c15" onclick="vira('15')"><img src="imagens_memoria/carta.png" id="c16" onclick="vira('16')">
+                        <img src="imagens_memoria/carta.png" id="c17" onclick="vira('17')"><img src="imagens_memoria/carta.png" id="c18" onclick="vira('18')">
                     </br>
                     </div>
                 </td>
@@ -127,35 +127,84 @@
 	
 	
 	<script>
-        let time = 90; // Tempo inicial em segundos
-        const cronometroDiv = document.getElementById('cronometro');
+		// Definir variáveis para tempo e pontuação
+		const tempoTotalSegundos = 90; // Tempo total em segundos
+		let tempoRestanteSegundos = tempoTotalSegundos;
+		const pontosTotais = 1000;
+		let pontos = pontosTotais;
+	
+		const cronometroDiv = document.getElementById('cronometro');
+		const pontosDiv = document.getElementById('pontos');
+	
+		const decrementoPorAtualizacao = (pontosTotais / tempoTotalSegundos) / 10; // Calcula quantos pontos diminuir a cada 0,1 segundo
+	
+		const intervaloCronometro = setInterval(() => {
+			tempoRestanteSegundos--;
+			const minutos = Math.floor(tempoRestanteSegundos / 60);
+			const segundos = tempoRestanteSegundos % 60;
+			cronometroDiv.textContent = `${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+	
+			if (tempoRestanteSegundos <= 0) {
+				clearInterval(intervaloCronometro);
+				pontosDiv.textContent = "0"; // Garante que a pontuação seja 0 quando o tempo acabar
+				// O tempo acabou, pode adicionar aqui lógica adicional para quando o jogo terminar
+			}
+		}, 1000);
+	
+		const intervaloPontos = setInterval(() => {
+			pontos -= decrementoPorAtualizacao;
+			pontosDiv.textContent = `${Math.round(pontos)}`;
+	
+			if (tempoRestanteSegundos <= 0 || pontos <= 0) {
+				clearInterval(intervaloPontos);
+			}
+		}, 100); // Atualiza a pontuação a cada 0,1 segundo
+		
+		async function vira(idCarta) {
+			const idApelido = sessionStorage.getItem('idApelido');
+			const idSala = sessionStorage.getItem('idSala');
 
-        const intervalId = setInterval(() => {
-            time--;
-            const minutes = Math.floor(time / 90);
-            const seconds = time % 90;
-            cronometroDiv.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+			try {
+				const resposta = await fetch('/virar-carta', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ id_carta: idCarta, id_apelido: idApelido, id_sala: idSala })
+				});
 
-            if (time <= 0) {
-                clearInterval(intervalId);
-            }
-        }, 1000);
+				if (!resposta.ok) {
+					throw new Error(`Erro HTTP: ${resposta.status}`);
+				}
 
-        function vira(carta) {
-            let teste= '';
-        }
-        let pontos = 1000; // Pontuação inicial
-        const pontosDiv = document.getElementById('pontos');
+				const respostaTexto = await resposta.text();
+				console.log('Resposta como texto:', respostaTexto); // Para diagnóstico
 
-        const intervalId2 = setInterval(() => {
-            pontos--;
-            pontosDiv.textContent = `${pontos}`;
+				// Verifique se a resposta não está vazia antes de tentar analisar como JSON
+				const resultado = respostaTexto ? JSON.parse(respostaTexto) : {};
+				atualizarInterfaceCartas(resultado);
+			} catch (err) {
+				console.error('Erro ao virar carta:', err);
+			}
+		}
 
-            if (pontos <= 0) {
-                clearInterval(intervalId2);
-            }
-        }, 90);
+
+
+		function atualizarInterfaceCartas(dadosCartas) {
+			if (!Array.isArray(dadosCartas)) {
+				console.error('Dados recebidos não são um array:', dadosCartas);
+				return;
+			}
+
+			dadosCartas.forEach(carta => {
+				const cartaElemento = document.getElementById(`c${carta.id_carta}`);
+				if (carta.nr_carta > 0) {
+					cartaElemento.src = `imagens_memoria/carta${carta.nr_carta}.png`;
+				} else {
+					cartaElemento.src = 'imagens_memoria/carta.png';
+				}
+			});
+		}
 	</script>
+	
 	
 </body>
 </html>

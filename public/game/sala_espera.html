@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sala de Espera - Jogo da Memória</title>
+    <!-- Inclua aqui os estilos ou links para CSS -->
+</head>
+<body>
+    <div id="sala-espera">
+        <div id="mensagem-espera"></div>
+        <button id="btnComecar">Começar</button>
+    </div>
+
+    <script>
+        const idApelido = sessionStorage.getItem('idApelido');
+        const idSala = sessionStorage.getItem('idSala');
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnComecar = document.getElementById('btnComecar');
+
+            btnComecar.addEventListener('click', function () {
+                btnComecar.disabled = true;
+                marcarJogadorPronto().then(() => verificarProntidao());
+            });
+        });
+
+        async function marcarJogadorPronto() {
+            if (idApelido && idSala) {
+                try {
+                    const resposta = await fetch('/marcar-pronto', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id_apelido: idApelido, id_sala: idSala })
+                    });
+
+                    await resposta.json();
+                } catch (err) {
+                    console.error('Erro ao marcar jogador como pronto:', err);
+                }
+            } else {
+                console.error('idApelido ou idSala não estão definidos');
+            }
+        }
+
+        function verificarProntidao() {
+            fetch(`/verificar-prontidao?id_sala=${idSala}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.todosJogadoresProntos) {
+                    window.location.href = 'sala_jogo_4_teste.html';
+                } else {
+                    document.getElementById('mensagem-espera').textContent = 'Aguardando outros jogadores ficarem prontos...';
+                    setTimeout(verificarProntidao, 700);
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao verificar prontidão:', error);
+                document.getElementById('mensagem-espera').textContent = 'Erro ao verificar a prontidão dos jogadores. Tentando novamente...';
+                setTimeout(verificarProntidao, 700);
+            });
+        }
+    </script>
+</body>
+</html>

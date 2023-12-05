@@ -205,11 +205,83 @@ app.post('/virar-carta', async (req, res) => {
 	}
 });
 
+app.post('/iniciar-jogo', async (req, res) => {
+    try {
+        const { id_apelido, id_sala } = req.body;
+        const request = new sql.Request();
+
+        request.input('id_apelido', sql.Int, id_apelido);
+        request.input('id_sala', sql.Int, id_sala);
+
+        // Chama a stored procedure para embaralhar as cartas
+        await request.execute('dbo.p_listar_cartas');
+
+        // Verifica se todos os jogadores na sala estão prontos
+        const resultadoProntidao = await request.query(`
+            SELECT COUNT(*) as totalJogadores, 
+                   SUM(CASE WHEN fl_pronto = 1 THEN 1 ELSE 0 END) as jogadoresProntos 
+            FROM dbo.t_status_jogador_sala 
+            WHERE id_sala = @id_sala
+        `);
+
+        const todosProntos = resultadoProntidao.recordset[0].totalJogadores === resultadoProntidao.recordset[0].jogadoresProntos;
+
+        if (todosProntos) {
+            res.json({ todosJogadoresProntos: true });
+        } else {
+            res.json({ todosJogadoresProntos: false });
+        }
+    } catch (err) {
+        res.status(500).send({ mensagem: "Erro ao iniciar o jogo", erro: err });
+    }
+});
 
 
+app.post('/marcar-pronto', async (req, res) => {
+    try {
+        const { id_apelido, id_sala } = req.body;
+        const request = new sql.Request();
 
+        request.input('id_apelido', sql.Int, id_apelido);
+        request.input('id_sala', sql.Int, id_sala);
 
+        await request.query(`
+            update t set
+            	fl_pronto = 1, dt_atualizacao = GETDATE() 
+			from
+				dbo.t_status_jogador_sala t
+            where
+				t.id_apelido = @id_apelido
+				and t.id_sala = @id_sala
+        `);
+		
+        res.json({ mensagem: "Estado atualizado com sucesso" });
+    } catch (err) {
+        res.status(500).send({ mensagem: "Erro ao atualizar estado", erro: err });
+    }
+});
 
+app.get('/verificar-prontidao', async (req, res) => {
+    try {
+        const { id_sala } = req.query;
+        const request = new sql.Request();
+
+        request.input('id_sala', sql.Int, id_sala);
+
+        const resultado = await request.query(`
+            SELECT COUNT(*) as totalJogadores, 
+                   SUM(CASE WHEN fl_pronto = 1 THEN 1 ELSE 0 END) as jogadoresProntos 
+            FROM t_status_jogador_sala 
+            WHERE id_sala = @id_sala
+        `);
+
+        const todosProntos = resultado.recordset[0].totalJogadores === resultado.recordset[0].jogadoresProntos;
+
+        res.json({ todosJogadoresProntos: todosProntos });
+    } catch (err) {
+        res.status(500).send({ mensagem: "Erro ao verificar prontidão", erro: err });
+    }
+});
 
 
 

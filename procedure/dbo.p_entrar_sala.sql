@@ -67,8 +67,29 @@ begin try
 
 	/*Resultado*/
 	begin
-		insert into dbo.t_apelido_sala (id_apelido, id_sala)
-		values (@id_apelido, @id_sala);
+		--insert into dbo.t_apelido_sala (id_apelido, id_sala)
+		--values (@id_apelido, @id_sala);
+		
+		merge dbo.t_apelido_sala as target
+		using (select @id_apelido, @id_sala) as source (id_apelido, id_sala)
+		on (target.id_apelido = source.id_apelido and target.id_sala = source.id_sala)
+		when matched then 
+			update set dt_atualizacao = getdate()
+		when not matched then 
+			insert (id_apelido, id_sala)
+			values (source.id_apelido, source.id_sala);
+
+		--insert into dbo.t_status_jogador_sala (id_apelido, id_sala)
+		--values (@id_apelido, @id_sala);
+
+		merge dbo.t_status_jogador_sala as target
+		using (select @id_apelido, @id_sala) as source (id_apelido, id_sala)
+		on (target.id_apelido = source.id_apelido and target.id_sala = source.id_sala)
+		when matched then 
+			update set dt_atualizacao = getdate()
+		when not matched then 
+			insert (id_apelido, id_sala)
+			values (source.id_apelido, source.id_sala);
 	end
 
 	select	@cd_retorno = 0,

@@ -36,5 +36,28 @@ create table dbo.t_apelido_sala
 	id_apelido_sala				int				identity(1,1)	not null,
 	id_apelido					int				not null,
 	id_sala						int				not null,
+	dt_atualizacao				datetime		not null	default(getdate())
+)
+if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'dbo.t_apelido_sala_cartas') and objectproperty(id, N'IsUserTable') = 1)
+	drop table dbo.t_apelido_sala_cartas
+create table dbo.t_apelido_sala_cartas
+(
+	id_apelido_sala_cartas		int				identity(1,1)	not null,
+	id_apelido					int				not null,
+	id_sala						int				not null,
+	id_carta					int				not null,
+	nr_imagem					int				not null,
+	fl_carta_virada_rodada		bit				not null	default(0),
+	fl_carta_virada_acerto		bit				not null	default(0),
 	dt_cadastro					datetime		not null	default(getdate())
+)
+if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'dbo.t_status_jogador_sala') and objectproperty(id, N'IsUserTable') = 1)
+	drop table dbo.t_status_jogador_sala
+create table dbo.t_status_jogador_sala
+(
+	id_status_jogador_salas		int				identity(1,1)	not null,
+	id_apelido					int				not null,
+	id_sala						int				not null,
+	fl_pronto					bit				not null	default(0),
+	dt_atualizacao				datetime		not null	default(getdate())
 )

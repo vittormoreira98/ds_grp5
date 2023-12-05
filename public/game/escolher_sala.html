@@ -31,32 +31,35 @@
 				console.error('Erro ao listar salas:', err);
 			}
 		}
-		
+
 		async function entrarSala(idSala) {
-			const idApelido = sessionStorage.getItem('idApelido');
+		const idApelido = sessionStorage.getItem('idApelido');
 
-			try {
-				// Faz a chamada para entrar na sala com idSala e idApelido
-				const resposta = await fetch('/entrar-sala', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ idSala, idApelido })
-				});
-				const resultado = await resposta.json();
+		try {
+			const resposta = await fetch('/entrar-sala', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ idSala, idApelido })
+			});
+			const resultado = await resposta.json();
+
+			if (resultado.sucesso) {
 				
+				sessionStorage.setItem('idApelido', idApelido);
+				sessionStorage.setItem('idSala', idSala);
 
-				if (resultado.sucesso) {
-					alert(resultado.mensagem);
-					//window.location.href = `/nova-pagina?sala=${idSala}&jogador=${idApelido}`;
-				} else {
-					alert(resultado.mensagem);
-				}
-			} catch (err) {
-				console.error('Erro ao entrar na sala:', err);
+				// Redireciona para a página de espera da sala
+				window.location.href = 'sala_espera.html';
+			} else {
+				alert(resultado.mensagem);
 			}
+		} catch (err) {
+			console.error('Erro ao entrar na sala:', err);
 		}
+	}
+
 
 		document.addEventListener('DOMContentLoaded', () => {
 			listarSalasDisponiveis(); // Carrega a lista de salas

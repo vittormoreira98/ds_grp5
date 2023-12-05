@@ -1,101 +1,210 @@
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Memory Game Interface
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   body {
-            font-family: 'Roboto', sans-serif;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Woznext Games</title>
+	<link rel="icon" href="imagens/icone.png" type="image/png">
+	<style>
+		body, html {
+			margin-top: 1%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: 'Inter', sans-serif;
+			background-color: white; /* A cor de fundo azul conforme o mockup */
+		}
+		.container {
+			width: 1450px; /* Largura do container baseado na imagem */
+			height: 480px;
+			background: #0966FF;
+			border-radius: 15px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px; /* Espaçamento entre elementos */
+            display: flex;
+            /* justify-content: space-around; */
+		}
+		.logo {
+			width: 200px; /* Tamanho do logo baseado na imagem */
+		}
+		.title {
+			color: white; /* Cor azul do título */
+			font-size: 34px; /* Tamanho da fonte do título */
+			text-align: center;
+			padding: 0px;
+		}
+		.input-box {
+			width: 40%;
+			padding: 10px;
+			text-align: center;
+		}
+		.input-field {
+			width: 80%;
+			text-align: center;
+			padding: 10px;
+			border-radius: 20px;
+			border: 2px solid #ced4da; /* Cor da borda do campo de input */
+			font-size: 26px; /* Tamanho da fonte do input */
+			color: #495057; /* Cor do texto do input */
+		}
+		.button {
+			width: 40%;
+			padding: 0px;
+			border-radius: 20px;
+			border: none;
+			background: transparent; /* Cor de fundo do botão azul */
+			color: white;
+			font-size: 34px; /* Tamanho da fonte do botão */
+			cursor: pointer;
+			border: 2px solid white; /* Cor da borda do botão */
+		}
+		
+		img{
+			margin: 20px;
+            width: 105px;
+            height: 120px;
+		}
+        
+		div.pontuacao{
+			/* border: solid white; */
+			text-align: center;
+			padding: 50px;
+            border: solid white;
+		}
+		div.cartas{
+			/* border: solid white; */
+			text-align: center;
+            /* margin-left: 300px; */
+		}
+        div.resumo{
+            color: WHITE;
+            text-align: center;
+            margin-right: 0px;
         }
-  </style>
- </head>
- <body class="bg-blue-600 flex justify-center items-center h-screen">
-  <div class="flex">
-   <div class="bg-white p-8 rounded-lg mr-10">
-    <h2 class="text-2xl text-blue-600 font-bold mb-6">
-     Sala Microsoft
-    </h2>
-    <div class="space-y-4 mb-6">
-     <div class="flex justify-between">
-      <span class="text-blue-600 font-bold">
-       1º João
-      </span>
-      <div class="w-16 h-4 bg-gray-300 rounded-full">
-      </div>
-     </div>
-     <div class="flex justify-between">
-      <span class="text-blue-600 font-bold">
-       2º Silvio
-      </span>
-      <div class="w-16 h-4 bg-gray-300 rounded-full">
-      </div>
-     </div>
-     <div class="flex justify-between">
-      <span class="text-blue-600 font-bold">
-       3º Lucas
-      </span>
-      <div class="w-16 h-4 bg-gray-300 rounded-full">
-      </div>
-     </div>
-     <div class="flex justify-between">
-      <span class="text-blue-600 font-bold">
-       4º Leticia
-      </span>
-      <div class="w-16 h-4 bg-gray-300 rounded-full">
-      </div>
-     </div>
-    </div>
-    <div class="mb-6">
-     <div class="flex items-center justify-between mb-4">
-      <span class="text-blue-600 font-bold">
-       Tempo restante:
-      </span>
-      <div class="flex items-center">
-       <i class="fas fa-clock text-blue-600 mr-2">
-       </i>
-       <span class="text-blue-600 font-bold text-lg">
-        1:00
-       </span>
-      </div>
-     </div>
-     <div class="flex items-center justify-between">
-      <span class="text-blue-600 font-bold">
-       Pontuação atual:
-      </span>
-      <span class="text-blue-600 font-bold text-lg">
-       75
-      </span>
-     </div>
-    </div>
-    <button class="w-full bg-blue-600 text-white py-2 rounded-lg">
-     Sair
-    </button>
-   </div>
-   <div class="grid grid-cols-5 gap-4">
-    <!-- Repeat for each card -->
-    <div class="bg-white rounded-lg p-6">
-     <img alt="Placeholder image of a memory card with a cube icon" class="mx-auto" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-mgA5sdQqvnJ2zqIwUOyyuV3M.png?st=2023-11-29T02%3A05%3A33Z&amp;se=2023-11-29T04%3A05%3A33Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A09%3A44Z&amp;ske=2023-11-29T20%3A09%3A44Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=tZnTSK6RFcvp%2BIdaBnfeAERttFQGT6%2Bm/2qOJDFpALk%3D" width="100"/>
-    </div>
-    <div class="bg-white rounded-lg p-6">
-     <img alt="Placeholder image of a memory card with a cube icon" class="mx-auto" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-mgA5sdQqvnJ2zqIwUOyyuV3M.png?st=2023-11-29T02%3A05%3A33Z&amp;se=2023-11-29T04%3A05%3A33Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A09%3A44Z&amp;ske=2023-11-29T20%3A09%3A44Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=tZnTSK6RFcvp%2BIdaBnfeAERttFQGT6%2Bm/2qOJDFpALk%3D" width="100"/>
-    </div>
-    <div class="bg-white rounded-lg p-6">
-     <img alt="Placeholder image of a memory card with a cube icon" class="mx-auto" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-mgA5sdQqvnJ2zqIwUOyyuV3M.png?st=2023-11-29T02%3A05%3A33Z&amp;se=2023-11-29T04%3A05%3A33Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A09%3A44Z&amp;ske=2023-11-29T20%3A09%3A44Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=tZnTSK6RFcvp%2BIdaBnfeAERttFQGT6%2Bm/2qOJDFpALk%3D" width="100"/>
-    </div>
-    <div class="bg-white rounded-lg p-6">
-     <img alt="Placeholder image of a memory card with a cube icon" class="mx-auto" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-mgA5sdQqvnJ2zqIwUOyyuV3M.png?st=2023-11-29T02%3A05%3A33Z&amp;se=2023-11-29T04%3A05%3A33Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A09%3A44Z&amp;ske=2023-11-29T20%3A09%3A44Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=tZnTSK6RFcvp%2BIdaBnfeAERttFQGT6%2Bm/2qOJDFpALk%3D" width="100"/>
-    </div>
-    <div class="bg-white rounded-lg p-6">
-     <img alt="Placeholder image of a memory card with a cube icon" class="mx-auto" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-mgA5sdQqvnJ2zqIwUOyyuV3M.png?st=2023-11-29T02%3A05%3A33Z&amp;se=2023-11-29T04%3A05%3A33Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A09%3A44Z&amp;ske=2023-11-29T20%3A09%3A44Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=tZnTSK6RFcvp%2BIdaBnfeAERttFQGT6%2Bm/2qOJDFpALk%3D" width="100"/>
-    </div>
-    <!-- ... Repeat for the remaining cards ... -->
-    <!-- ... Total of 15 cards ... -->
-   </div>
-  </div>
- </body>
+	</style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+	<div class="container">
+		<table>
+            <tr>
+                <td>
+                    <div class="resumo">
+                        <h2 id="tempo">Tempo Restante
+                            <!-- Aqui vai um cronometro que vai de 1 minuto no formato 01:00 até 0 segundo, regredindo de 1 em 1 segundo, a partir do carregamento da pagima-->
+                            <div id="cronometro"></div>
+                        </h2>
+                        </br></br>
+                        <h2 id="pontuacao">Pontuação
+                        <div id="pontos"></div></h2>
+                    </div>
+                </td>
+                
+                <td>
+                    <div class="cartas">
+                        <img src="imagens_memoria/carta.png" id="c1" onclick="vira('1')"><img src="imagens_memoria/carta.png" id="c2" onclick="vira('2')">
+                        <img src="imagens_memoria/carta.png" id="c3" onclick="vira('3')"><img src="imagens_memoria/carta.png" id="c4" onclick="vira('4')">
+                        <img src="imagens_memoria/carta.png" id="c5" onclick="vira('5')"><img src="imagens_memoria/carta.png" id="c6" onclick="vira('6')">
+                    </br>
+                        <img src="imagens_memoria/carta.png" id="c7" onclick="vira('7')"><img src="imagens_memoria/carta.png" id="c8" onclick="vira('8')">
+                        <img src="imagens_memoria/carta.png" id="c9" onclick="vira('9')"><img src="imagens_memoria/carta.png" id="c10" onclick="vira('10')">
+                        <img src="imagens_memoria/carta.png" id="c11" onclick="vira('11')"><img src="imagens_memoria/carta.png" id="c12" onclick="vira('12')">
+                    </br>
+                        <img src="imagens_memoria/carta.png" id="c13" onclick="vira('13')"><img src="imagens_memoria/carta.png" id="c14" onclick="vira('14')">
+                        <img src="imagens_memoria/carta.png" id="c15" onclick="vira('15')"><img src="imagens_memoria/carta.png" id="c16" onclick="vira('16')">
+                        <img src="imagens_memoria/carta.png" id="c17" onclick="vira('17')"><img src="imagens_memoria/carta.png" id="c18" onclick="vira('18')">
+                    </br>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+	</div>
+
+	
+	
+	<script>
+		// Definir variáveis para tempo e pontuação
+		const tempoTotalSegundos = 90; // Tempo total em segundos
+		let tempoRestanteSegundos = tempoTotalSegundos;
+		const pontosTotais = 1000;
+		let pontos = pontosTotais;
+	
+		const cronometroDiv = document.getElementById('cronometro');
+		const pontosDiv = document.getElementById('pontos');
+	
+		const decrementoPorAtualizacao = (pontosTotais / tempoTotalSegundos) / 10; // Calcula quantos pontos diminuir a cada 0,1 segundo
+	
+		const intervaloCronometro = setInterval(() => {
+			tempoRestanteSegundos--;
+			const minutos = Math.floor(tempoRestanteSegundos / 60);
+			const segundos = tempoRestanteSegundos % 60;
+			cronometroDiv.textContent = `${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+	
+			if (tempoRestanteSegundos <= 0) {
+				clearInterval(intervaloCronometro);
+				pontosDiv.textContent = "0"; // Garante que a pontuação seja 0 quando o tempo acabar
+				// O tempo acabou, pode adicionar aqui lógica adicional para quando o jogo terminar
+			}
+		}, 1000);
+	
+		const intervaloPontos = setInterval(() => {
+			pontos -= decrementoPorAtualizacao;
+			pontosDiv.textContent = `${Math.round(pontos)}`;
+	
+			if (tempoRestanteSegundos <= 0 || pontos <= 0) {
+				clearInterval(intervaloPontos);
+			}
+		}, 100); // Atualiza a pontuação a cada 0,1 segundo
+		
+		async function vira(idCarta) {
+			const idApelido = sessionStorage.getItem('idApelido');
+			const idSala = sessionStorage.getItem('idSala');
+
+			try {
+				const resposta = await fetch('/virar-carta', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ id_carta: idCarta, id_apelido: idApelido, id_sala: idSala })
+				});
+
+				if (!resposta.ok) {
+					throw new Error(`Erro HTTP: ${resposta.status}`);
+				}
+
+				const respostaTexto = await resposta.text();
+				console.log('Resposta como texto:', respostaTexto); // Para diagnóstico
+
+				// Verifique se a resposta não está vazia antes de tentar analisar como JSON
+				const resultado = respostaTexto ? JSON.parse(respostaTexto) : {};
+				atualizarInterfaceCartas(resultado);
+			} catch (err) {
+				console.error('Erro ao virar carta:', err);
+			}
+		}
+
+
+
+		function atualizarInterfaceCartas(dadosCartas) {
+			if (!Array.isArray(dadosCartas)) {
+				console.error('Dados recebidos não são um array:', dadosCartas);
+				return;
+			}
+
+			dadosCartas.forEach(carta => {
+				const cartaElemento = document.getElementById(`c${carta.id_carta}`);
+				if (carta.nr_carta > 0) {
+					cartaElemento.src = `imagens_memoria/carta${carta.nr_carta}.png`;
+				} else {
+					cartaElemento.src = 'imagens_memoria/carta.png';
+				}
+			});
+		}
+	</script>
+	
+	
+</body>
 </html>

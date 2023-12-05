@@ -5,6 +5,19 @@
 	<title>Woznext</title>
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="icon" href="imagens/icone.png" type="image/png">
+	<style>
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pdfDownload {
+            width: 50%;
+            height: 160px;
+            text-align: center;
+			padding: 100px;
+        }
+    </style>
 </head>
 <body>
 	<div class="content">
@@ -15,7 +28,21 @@
 			</div>
 			<img src="imagens/woznext-negativo.jpeg" alt="Woznext">
 		</div>
-	
+
+		<div class="container">
+			<div class="pdfDownload">
+				<a href="Monografia.pdf" download>
+					<img src="documentacao_escrita.png" alt="Download PDF - Documentação Escrita" 
+						style="width: 266px; height: 150px; cursor: pointer;">
+				</a>
+			</div>
+			<div class="pdfDownload">
+				<a href="Monografia.pdf" download>
+					<img src="manual_jogo.png" alt="Download PDF - Manual do Jogo"
+						style="width: 266px; height: 150px; cursor: pointer;">
+				</a>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

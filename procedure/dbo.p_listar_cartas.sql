@@ -184,7 +184,6 @@ begin try
 
 	end
 	
-	
 
 	/*Definindo retorno com processamento efetuado com sucesso*/
 	select	@cd_retorno = 0,

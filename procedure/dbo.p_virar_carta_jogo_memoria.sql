@@ -251,8 +251,7 @@ begin try
 			from
 				dbo.t_apelido_sala t
 			where
-				t.id_apelido = @id_apeli
-				do
+				t.id_apelido = @id_apelido
 				and t.id_sala = @id_sala
 		end
 	end

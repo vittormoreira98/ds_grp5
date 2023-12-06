@@ -8,7 +8,7 @@ create procedure dbo.p_virar_carta_jogo_memoria
 	@id_sala					int				= null,
 	@debug						bit				= null,
 	@cd_retorno					int				= null output,
-	@nm_retorno					varchar(max)	= null output,
+	@nm_retorno					varchar(255)	= null output,
 	@nr_versao_proc				varchar(15)		= null output
 )
 as begin
@@ -131,25 +131,40 @@ begin try
 			and t.id_sala = @id_sala
 	end
 
+	update t set
+		fl_carta_virada_rodada = 1
+	from
+		#t_apelido_sala_cartas_pvcjm t
+	where
+		t.id_carta = @id_carta
+
 	/*Conferindo carta virada na rodada 1 e 2*/
 	begin
-		select top 1
-			@nr_carta_virada_rodada_1 = t.nr_carta,
-			@id_carta_virada_rodada_1 = t.id_carta
-		from
-			#t_apelido_sala_cartas_pvcjm t
-		where
-			t.fl_carta_virada_rodada = 1
+		if (select count(*) from #t_apelido_sala_cartas_pvcjm t where t.fl_carta_virada_rodada = 1) = 2
+		begin
+			select top 1
+				@nr_carta_virada_rodada_1 = t.nr_imagem,
+				@id_carta_virada_rodada_1 = t.id_carta
+			from
+				#t_apelido_sala_cartas_pvcjm t
+			where
+				t.fl_carta_virada_rodada = 1
+				and t.id_carta <> @id_carta
+				
+			select top 1
+				@nr_carta_virada_rodada_2 = t.nr_imagem
+			from
+				#t_apelido_sala_cartas_pvcjm t
+			where
+				t.id_carta = @id_carta
+				and isnull(@id_carta_virada_rodada_1 ,0) <> 0
+			
+			if isnull(@id_carta_virada_rodada_1,0) <> 0
+				select @fl_acertou = case when @nr_carta_virada_rodada_1 = @nr_carta_virada_rodada_2 then 1 else 0 end
+		end
 		
-		select top 1
-			@nr_carta_virada_rodada_2 = t.nr_carta
-		from
-			#t_apelido_sala_cartas_pvcjm t
-		where
-			t.id_carta = @id_carta
-		
-		select @fl_acertou = case when @nr_carta_virada_rodada_1 = @nr_carta_virada_rodada_2 then 1 else 0 end
 	end
+
 
 	/*Atualizando controle*/
 	begin
@@ -164,40 +179,37 @@ begin try
 			where
 				t.id_carta in (@id_carta, @id_carta_virada_rodada_1)
 		end
-		else
+		
+		if (select count(*) from #t_apelido_sala_cartas_pvcjm t where t.fl_carta_virada_rodada = 1) >= 3
 		begin
-			
-			if isnull(@id_carta_virada_rodada_1,0) = 0
-			begin
-				/*Quando erra, mas é a primeira carta aberta na rodada, marcar a flag de carta virada na rodada*/
-				update t set
-					fl_carta_virada_rodada = 1
-				from
-					#t_apelido_sala_cartas_pvcjm t
-				where
-					t.id_carta = @id_carta
-			end
-			else
-			begin
-				/*Quando erra e á segunda carta aberta na rodada, desmarcar a flag de carta virada da rodada*/
-				update t set
-					fl_carta_virada_rodada = 0
-				from
-					#t_apelido_sala_cartas_pvcjm t
-				where
-					t.id_carta in (@id_carta, @id_carta_virada_rodada_1)
-			end
+			update t set
+				fl_carta_virada_rodada = 0,
+				fl_carta_virada_acerto = 0
+			from
+				#t_apelido_sala_cartas_pvcjm t
+			where
+				t.fl_carta_virada_rodada = 1
+				and t.id_carta <> @id_carta
 		end
 	end
+
+	update t set
+		fl_carta_virada_rodada		= ta.fl_carta_virada_rodada,
+		fl_carta_virada_acerto		= ta.fl_carta_virada_acerto
+	from
+		dbo.t_apelido_sala_cartas t
+		inner join #t_apelido_sala_cartas_pvcjm ta
+			on ta.id_apelido_sala_cartas = t.id_apelido_sala_cartas
 
 	select
 		t.id_carta,
 		nr_carta	=
-			case	when t.fl_carta_virada_acerto = 1 or (t.fl_carta_virada_rodada = 1 and @fl_acertou = 1)
+			case	when t.fl_carta_virada_rodada = 1 or t.fl_carta_virada_acerto = 1
 						then t.nr_imagem
 					else 0 end
 	from
 		#t_apelido_sala_cartas_pvcjm t
+	
 	
 
 	/*Definindo retorno com processamento efetuado com sucesso*/

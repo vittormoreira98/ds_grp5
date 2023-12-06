@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Woznext Games</title>
 	<link rel="icon" href="imagens/icone.png" type="image/png">
 	<style>
-		body, html {
+		body,
+		html {
 			margin-top: 1%;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			font-family: 'Inter', sans-serif;
-			background-color: white; /* A cor de fundo azul conforme o mockup */
+			background-color: white;
+			/* A cor de fundo azul conforme o mockup */
 		}
+
 		.container {
-			width: 1450px; /* Largura do container baseado na imagem */
+			width: 1450px;
+			/* Largura do container baseado na imagem */
 			height: 480px;
 			background: #0966FF;
 			border-radius: 15px;
@@ -23,143 +28,171 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			gap: 10px; /* Espaçamento entre elementos */
-            display: flex;
-            /* justify-content: space-around; */
+			gap: 10px;
+			/* Espaçamento entre elementos */
+			display: flex;
+			/* justify-content: space-around; */
 		}
+
 		.logo {
-			width: 200px; /* Tamanho do logo baseado na imagem */
+			width: 200px;
+			/* Tamanho do logo baseado na imagem */
 		}
+
 		.title {
-			color: white; /* Cor azul do título */
-			font-size: 34px; /* Tamanho da fonte do título */
+			color: white;
+			/* Cor azul do título */
+			font-size: 34px;
+			/* Tamanho da fonte do título */
 			text-align: center;
 			padding: 0px;
 		}
+
 		.input-box {
 			width: 40%;
 			padding: 10px;
 			text-align: center;
 		}
+
 		.input-field {
 			width: 80%;
 			text-align: center;
 			padding: 10px;
 			border-radius: 20px;
-			border: 2px solid #ced4da; /* Cor da borda do campo de input */
-			font-size: 26px; /* Tamanho da fonte do input */
-			color: #495057; /* Cor do texto do input */
+			border: 2px solid #ced4da;
+			/* Cor da borda do campo de input */
+			font-size: 26px;
+			/* Tamanho da fonte do input */
+			color: #495057;
+			/* Cor do texto do input */
 		}
+
 		.button {
 			width: 40%;
 			padding: 0px;
 			border-radius: 20px;
 			border: none;
-			background: transparent; /* Cor de fundo do botão azul */
+			background: transparent;
+			/* Cor de fundo do botão azul */
 			color: white;
-			font-size: 34px; /* Tamanho da fonte do botão */
+			font-size: 34px;
+			/* Tamanho da fonte do botão */
 			cursor: pointer;
-			border: 2px solid white; /* Cor da borda do botão */
+			border: 2px solid white;
+			/* Cor da borda do botão */
 		}
-		
-		img{
+
+		img {
 			margin: 20px;
-            width: 105px;
-            height: 120px;
+			width: 105px;
+			height: 120px;
 		}
-        
-		div.pontuacao{
+
+		div.pontuacao {
 			/* border: solid white; */
 			text-align: center;
 			padding: 50px;
-            border: solid white;
+			border: solid white;
 		}
-		div.cartas{
+
+		div.cartas {
 			/* border: solid white; */
 			text-align: center;
-            /* margin-left: 300px; */
+			/* margin-left: 300px; */
 		}
-        div.resumo{
-            color: WHITE;
-            text-align: center;
-            margin-right: 0px;
-        }
+
+		div.resumo {
+			color: WHITE;
+			text-align: center;
+			margin-right: 0px;
+		}
 	</style>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet" />
 </head>
+
 <body>
 	<div class="container">
 		<table>
-            <tr>
-                <td>
-                    <div class="resumo">
-                        <h2 id="tempo">Tempo Restante
-                            <!-- Aqui vai um cronometro que vai de 1 minuto no formato 01:00 até 0 segundo, regredindo de 1 em 1 segundo, a partir do carregamento da pagima-->
-                            <div id="cronometro"></div>
-                        </h2>
-                        </br></br>
-                        <h2 id="pontuacao">Pontuação
-                        <div id="pontos"></div></h2>
-                    </div>
-                </td>
-                
-                <td>
-                    <div class="cartas">
-                        <img src="imagens_memoria/carta.png" id="c1" onclick="vira('1')"><img src="imagens_memoria/carta.png" id="c2" onclick="vira('2')">
-                        <img src="imagens_memoria/carta.png" id="c3" onclick="vira('3')"><img src="imagens_memoria/carta.png" id="c4" onclick="vira('4')">
-                        <img src="imagens_memoria/carta.png" id="c5" onclick="vira('5')"><img src="imagens_memoria/carta.png" id="c6" onclick="vira('6')">
-                    </br>
-                        <img src="imagens_memoria/carta.png" id="c7" onclick="vira('7')"><img src="imagens_memoria/carta.png" id="c8" onclick="vira('8')">
-                        <img src="imagens_memoria/carta.png" id="c9" onclick="vira('9')"><img src="imagens_memoria/carta.png" id="c10" onclick="vira('10')">
-                        <img src="imagens_memoria/carta.png" id="c11" onclick="vira('11')"><img src="imagens_memoria/carta.png" id="c12" onclick="vira('12')">
-                    </br>
-                        <img src="imagens_memoria/carta.png" id="c13" onclick="vira('13')"><img src="imagens_memoria/carta.png" id="c14" onclick="vira('14')">
-                        <img src="imagens_memoria/carta.png" id="c15" onclick="vira('15')"><img src="imagens_memoria/carta.png" id="c16" onclick="vira('16')">
-                        <img src="imagens_memoria/carta.png" id="c17" onclick="vira('17')"><img src="imagens_memoria/carta.png" id="c18" onclick="vira('18')">
-                    </br>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        
+			<tr>
+				<td>
+					<div class="resumo">
+						<h2 id="tempo">Tempo Restante
+							<!-- Aqui vai um cronometro que vai de 1 minuto no formato 01:00 até 0 segundo, regredindo de 1 em 1 segundo, a partir do carregamento da pagima-->
+							<div id="cronometro"></div>
+						</h2>
+						</br></br>
+						<h2 id="pontuacao">Pontuação
+							<div id="pontos"></div>
+						</h2>
+					</div>
+				</td>
+
+				<td>
+					<div class="cartas">
+						<img src="imagens_memoria/carta.png" id="c1" onclick="vira('1')"><img
+							src="imagens_memoria/carta.png" id="c2" onclick="vira('2')">
+						<img src="imagens_memoria/carta.png" id="c3" onclick="vira('3')"><img
+							src="imagens_memoria/carta.png" id="c4" onclick="vira('4')">
+						<img src="imagens_memoria/carta.png" id="c5" onclick="vira('5')"><img
+							src="imagens_memoria/carta.png" id="c6" onclick="vira('6')">
+						</br>
+						<img src="imagens_memoria/carta.png" id="c7" onclick="vira('7')"><img
+							src="imagens_memoria/carta.png" id="c8" onclick="vira('8')">
+						<img src="imagens_memoria/carta.png" id="c9" onclick="vira('9')"><img
+							src="imagens_memoria/carta.png" id="c10" onclick="vira('10')">
+						<img src="imagens_memoria/carta.png" id="c11" onclick="vira('11')"><img
+							src="imagens_memoria/carta.png" id="c12" onclick="vira('12')">
+						</br>
+						<img src="imagens_memoria/carta.png" id="c13" onclick="vira('13')"><img
+							src="imagens_memoria/carta.png" id="c14" onclick="vira('14')">
+						<img src="imagens_memoria/carta.png" id="c15" onclick="vira('15')"><img
+							src="imagens_memoria/carta.png" id="c16" onclick="vira('16')">
+						<img src="imagens_memoria/carta.png" id="c17" onclick="vira('17')"><img
+							src="imagens_memoria/carta.png" id="c18" onclick="vira('18')">
+						</br>
+					</div>
+				</td>
+			</tr>
+		</table>
+
 	</div>
 
-	
-	
+
+
 	<script>
 		// Definir variáveis para tempo e pontuação
 		const tempoTotalSegundos = 90; // Tempo total em segundos
 		let tempoRestanteSegundos = tempoTotalSegundos;
 		const pontosTotais = 1000;
 		let pontos = pontosTotais;
-	
+
 		const cronometroDiv = document.getElementById('cronometro');
 		const pontosDiv = document.getElementById('pontos');
-	
+
 		const decrementoPorAtualizacao = (pontosTotais / tempoTotalSegundos) / 10; // Calcula quantos pontos diminuir a cada 0,1 segundo
-	
+
 		const intervaloCronometro = setInterval(() => {
 			tempoRestanteSegundos--;
 			const minutos = Math.floor(tempoRestanteSegundos / 60);
 			const segundos = tempoRestanteSegundos % 60;
 			cronometroDiv.textContent = `${minutos < 10 ? '0' : ''}${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
-	
+
 			if (tempoRestanteSegundos <= 0) {
 				clearInterval(intervaloCronometro);
 				pontosDiv.textContent = "0"; // Garante que a pontuação seja 0 quando o tempo acabar
 				// O tempo acabou, pode adicionar aqui lógica adicional para quando o jogo terminar
 			}
 		}, 1000);
-	
+
 		const intervaloPontos = setInterval(() => {
 			pontos -= decrementoPorAtualizacao;
 			pontosDiv.textContent = `${Math.round(pontos)}`;
-	
+
 			if (tempoRestanteSegundos <= 0 || pontos <= 0) {
 				clearInterval(intervaloPontos);
 			}
 		}, 100); // Atualiza a pontuação a cada 0,1 segundo
-		
+
 		async function vira(idCarta) {
 			const idApelido = sessionStorage.getItem('idApelido');
 			const idSala = sessionStorage.getItem('idSala');
@@ -175,16 +208,17 @@
 					throw new Error(`Erro HTTP: ${resposta.status}`);
 				}
 
-				const respostaTexto = await resposta.text();
-				console.log('Resposta como texto:', respostaTexto); // Para diagnóstico
-
-				// Verifique se a resposta não está vazia antes de tentar analisar como JSON
-				const resultado = respostaTexto ? JSON.parse(respostaTexto) : {};
-				atualizarInterfaceCartas(resultado);
+				const resultado = await resposta.json();
+				if (resultado.cd_retorno !== 0) {
+					alert(resultado.nm_retorno);
+				} else {
+					atualizarInterfaceCartas(resultado.cartas);
+				}
 			} catch (err) {
 				console.error('Erro ao virar carta:', err);
 			}
 		}
+
 
 
 
@@ -197,14 +231,15 @@
 			dadosCartas.forEach(carta => {
 				const cartaElemento = document.getElementById(`c${carta.id_carta}`);
 				if (carta.nr_carta > 0) {
-					cartaElemento.src = `imagens_memoria/carta${carta.nr_carta}.png`;
+					cartaElemento.src = `imagens_memoria/${carta.nr_carta}.png`;
 				} else {
 					cartaElemento.src = 'imagens_memoria/carta.png';
 				}
 			});
 		}
 	</script>
-	
-	
+
+
 </body>
+
 </html>

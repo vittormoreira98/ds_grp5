@@ -7,7 +7,7 @@ create procedure dbo.p_listar_cartas
 	@id_sala					int				= null,
 	@debug						bit				= null,
 	@cd_retorno					int				= null output,
-	@nm_retorno					varchar(max)	= null output,
+	@nm_retorno					varchar(255)	= null output,
 	@nr_versao_proc				varchar(15)		= null output
 )
 as begin
@@ -44,7 +44,7 @@ begin try
 	end
 
 	insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
-	('linha50','linha50',@dt_sistema),
+	('linha47','linha47',@dt_sistema),
 	('@id_apelido',convert(varchar(max),@id_apelido),@dt_sistema),
 	('@id_sala',convert(varchar(max),@id_sala),@dt_sistema)
 

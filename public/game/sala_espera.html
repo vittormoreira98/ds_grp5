@@ -2,143 +2,159 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sala de Espera - Jogo da Memória</title>
-    <style>
-        body,
-        html {
-            margin-top: 1%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Inter', sans-serif;
-            background-color: white;
-            /* A cor de fundo azul conforme o mockup */
-        }
-
-        .container {
-            width: 1450px;
-            /* Largura do container baseado na imagem */
-            height: 480px;
-            background: #0966FF;
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            /* Espaçamento entre elementos */
-        }
-
-        .logo {
-            width: 200px;
-            /* Tamanho do logo baseado na imagem */
-        }
-
-        .title {
-            color: white;
-            /* Cor azul do título */
-            font-size: 34px;
-            /* Tamanho da fonte do título */
-            text-align: center;
-            padding: 0px;
-        }
-
-        .input-box {
-            width: 40%;
-            padding: 10px;
-            text-align: center;
-        }
-
-        .input-field {
-            width: 80%;
-            text-align: center;
-            padding: 10px;
-            border-radius: 20px;
-            border: 2px solid #ced4da;
-            /* Cor da borda do campo de input */
-            font-size: 26px;
-            /* Tamanho da fonte do input */
-            color: #495057;
-            /* Cor do texto do input */
-        }
-
-        .button {
-            width: 40%;
-            padding: 0px;
-            border-radius: 20px;
-            border: none;
-            background: transparent;
-            /* Cor de fundo do botão azul */
-            color: white;
-            font-size: 34px;
-            /* Tamanho da fonte do botão */
-            cursor: pointer;
-            border: 2px solid white;
-            /* Cor da borda do botão */
-        }
-    </style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sala de Espera - Jogo da Memória</title>
+	<style>
+		body, html {
+			margin-top: 1%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: 'Inter', sans-serif;
+			background-color: white; /* A cor de fundo azul conforme o mockup */
+		}
+		.container {
+			width: 1450px; /* Largura do container baseado na imagem */
+			height: 480px;
+			background: #0966FF;
+			border-radius: 15px;
+			padding: 20px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			text-align: center;
+			gap: 20px; /* Espaçamento entre elementos */
+		}
+		.logo {
+			width: 200px; /* Tamanho do logo baseado na imagem */
+		}
+		.title {
+			color: white; /* Cor azul do título */
+			font-size: 34px; /* Tamanho da fonte do título */
+			text-align: center;
+			padding: 0px;
+		}
+		.input-box {
+			width: 40%;
+			padding: 10px;
+			text-align: center;
+		}
+		.input-field {
+			width: 80%;
+			text-align: center;
+			padding: 10px;
+			border-radius: 20px;
+			border: 2px solid #ced4da; /* Cor da borda do campo de input */
+			font-size: 26px; /* Tamanho da fonte do input */
+			color: #495057; /* Cor do texto do input */
+		}
+		.button {
+			width: 40%;
+			padding: 0px;
+			border-radius: 20px;
+			border: none;
+			background: transparent; /* Cor de fundo do botão azul */
+			color: white;
+			font-size: 34px; /* Tamanho da fonte do botão */
+			cursor: pointer;
+			border: 2px solid white; /* Cor da borda do botão */
+		}
+		
+	</style>
 </head>
 
 <body>
-    <div class="container">
-        <img src="imagens/logo_game_branco_sem_fundologo.png" alt="Logo" class="logo">
-        <h1 class="title">
-            <div id="mensagem-espera"></div>
-        </h1>
+	<div id="sala-espera">
+		
+	
+	<div class="container">
+		<img src="imagens/logo_game_branco_sem_fundologo.png" alt="Logo" class="logo">
+		<h1 class="title">
+			<div id="mensagem-espera"></div>
+		</h1>
         <button class="button" id="btnComecar">Começar</button>
-    </div>
+	</div>
 
-    <script>
-        const idApelido = sessionStorage.getItem('idApelido');
-        const idSala = sessionStorage.getItem('idSala');
+	<script>
+		const idApelido = sessionStorage.getItem('idApelido');
+		const idSala = sessionStorage.getItem('idSala');
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const btnComecar = document.getElementById('btnComecar');
+		document.addEventListener('DOMContentLoaded', function () {
+			const btnComecar = document.getElementById('btnComecar');
 
-            btnComecar.addEventListener('click', function () {
-                btnComecar.disabled = true;
-                marcarJogadorPronto().then(() => verificarProntidao());
-            });
-        });
+			btnComecar.addEventListener('click', function () {
+				btnComecar.disabled = true;
+				marcarJogadorPronto()
+					.then(() => iniciarJogo()) // Chamar iniciarJogo após verificarProntidao
+					.then(() => verificarProntidao())
+					.catch(err => console.error('Erro:', err));
+			});
+		});
 
-        async function marcarJogadorPronto() {
-            if (idApelido && idSala) {
-                try {
-                    const resposta = await fetch('/marcar-pronto', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ id_apelido: idApelido, id_sala: idSala })
-                    });
+		async function iniciarJogo() {
+			const idApelido = sessionStorage.getItem('idApelido');
+			const idSala = sessionStorage.getItem('idSala');
 
-                    await resposta.json();
-                } catch (err) {
-                    console.error('Erro ao marcar jogador como pronto:', err);
-                }
-            } else {
-                console.error('idApelido ou idSala não estão definidos');
-            }
-        }
+			try {
+				const resposta = await fetch('/iniciar-jogo', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ id_apelido: idApelido, id_sala: idSala })
+				});
 
-        function verificarProntidao() {
-            fetch(`/verificar-prontidao?id_sala=${idSala}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.todosJogadoresProntos) {
-                        window.location.href = 'sala_jogo.html';
-                    } else {
-                        document.getElementById('mensagem-espera').textContent = 'Aguardando outros jogadores ficarem prontos...';
-                        setTimeout(verificarProntidao, 700);
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao verificar prontidão:', error);
-                    document.getElementById('mensagem-espera').textContent = 'Erro ao verificar a prontidão dos jogadores. Tentando novamente...';
-                    setTimeout(verificarProntidao, 700);
-                });
-        }
-    </script>
+				if (!resposta.ok) {
+					throw new Error(`Erro HTTP: ${resposta.status}`);
+				}
+
+				const resultado = await resposta.json();
+				if (resultado.cd_retorno !== 0) {
+					btnComecar.disabled = false; // Reabilitar o botão se houver um erro
+				} else {
+					window.location.href = 'sala_jogo.html'; // Altere para o caminho correto da página do jogo
+				}
+			} catch (err) {
+				console.error('Erro ao iniciar o jogo:', err);
+				btnComecar.disabled = false; // Reabilitar o botão se houver um erro na requisição
+			}
+		}
+
+		async function marcarJogadorPronto() {
+			if (idApelido && idSala) {
+				try {
+					const resposta = await fetch('/marcar-pronto', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ id_apelido: idApelido, id_sala: idSala })
+					});
+
+					await resposta.json();
+				} catch (err) {
+					console.error('Erro ao marcar jogador como pronto:', err);
+				}
+			} else {
+				console.error('idApelido ou idSala não estão definidos');
+			}
+		}
+
+		function verificarProntidao() {
+			fetch(`/verificar-prontidao?id_sala=${idSala}`)
+				.then(response => response.json())
+				.then(data => {
+					if (data.todosJogadoresProntos) {
+						window.location.href = 'sala_jogo.html';
+					} else {
+						document.getElementById('mensagem-espera').textContent = 'Aguardando outros jogadores ficarem prontos...';
+						setTimeout(verificarProntidao, 700);
+					}
+				})
+				.catch(error => {
+					console.error('Erro ao verificar prontidão:', error);
+					document.getElementById('mensagem-espera').textContent = 'Erro ao verificar a prontidão dos jogadores. Tentando novamente...';
+					setTimeout(verificarProntidao, 700);
+				});
+		}
+	</script>
 </body>
 
 </html>

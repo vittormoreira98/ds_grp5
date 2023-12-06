@@ -210,13 +210,20 @@ app.post('/virar-carta', async (req, res) => {
 
     try {
         const request = new sql.Request();
+        // Configurar parâmetros da requisição
         request.input('id_carta', sql.Int, id_carta);
         request.input('id_apelido', sql.Int, id_apelido);
         request.input('id_sala', sql.Int, id_sala);
+        request.output('cd_retorno', sql.Int);
+        request.output('nm_retorno', sql.VarChar(255));
 
         const resultado = await request.execute('dbo.p_virar_carta_jogo_memoria');
-        console.log(resultado.recordset); // Adicione este log para ver a resposta da stored procedure
-        res.json(resultado.recordset || {}); // Garanta que está enviando um JSON válido
+
+        if (resultado.output.cd_retorno !== 0) {
+            res.json({ cd_retorno: resultado.output.cd_retorno, nm_retorno: resultado.output.nm_retorno });
+        } else {
+            res.json({ cd_retorno: 0, cartas: resultado.recordset });
+        }
     } catch (err) {
         console.error(err);
         res.status(500).json({ erro: err.message });
@@ -230,9 +237,13 @@ app.post('/iniciar-jogo', async (req, res) => {
 
         request.input('id_apelido', sql.Int, id_apelido);
         request.input('id_sala', sql.Int, id_sala);
+        request.output('cd_retorno', sql.Int);
+        request.output('nm_retorno', sql.VarChar(255)); // Corrigido aqui
+
 
         // Chama a stored procedure para embaralhar as cartas
-        await request.execute('dbo.p_listar_cartas');
+        const resultado = await request.execute('dbo.p_listar_cartas'); // Corrigido aqui
+        
 
         // Verifica se todos os jogadores na sala estão prontos
         const resultadoProntidao = await request.query(`
@@ -244,10 +255,10 @@ app.post('/iniciar-jogo', async (req, res) => {
 
         const todosProntos = resultadoProntidao.recordset[0].totalJogadores === resultadoProntidao.recordset[0].jogadoresProntos;
 
-        if (todosProntos) {
-            res.json({ todosJogadoresProntos: true });
+        if (resultado.output.cd_retorno == 0 && todosProntos){
+            res.json({ cd_retorno: 0,nm_retorno: resultado.output.nm_retorno, todosJogadoresProntos: true });
         } else {
-            res.json({ todosJogadoresProntos: false });
+            res.json({ cd_retorno: resultado.output.cd_retorno, nm_retorno: resultado.output.nm_retorno,todosJogadoresProntos: false });
         }
     } catch (err) {
         res.status(500).send({ mensagem: "Erro ao iniciar o jogo", erro: err });

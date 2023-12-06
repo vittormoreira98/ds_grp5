@@ -7,7 +7,7 @@ create procedure dbo.p_incluir_apelido_jogo_memoria
 	@debug						bit				= null,
 	@id_apelido					int				= null output,
 	@cd_retorno					int				= null output,
-	@nm_retorno					varchar(max)	= null output,
+	@nm_retorno					varchar(255)	= null output,
 	@nr_versao_proc				varchar(15)		= null output
 )
 as begin

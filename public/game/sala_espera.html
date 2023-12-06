@@ -86,8 +86,7 @@
 			btnComecar.addEventListener('click', function () {
 				btnComecar.disabled = true;
 				marcarJogadorPronto()
-					.then(() => iniciarJogo()) // Chamar iniciarJogo após verificarProntidao
-					.then(() => verificarProntidao())
+					.then(verificarProntidao) // Após marcar jogador como pronto, verificar prontidão
 					.catch(err => console.error('Erro:', err));
 			});
 		});
@@ -142,15 +141,17 @@
 				.then(response => response.json())
 				.then(data => {
 					if (data.todosJogadoresProntos) {
-						window.location.href = 'sala_jogo.html';
+						iniciarJogo(); // Chamar iniciarJogo apenas se todos os jogadores estiverem prontos
 					} else {
 						document.getElementById('mensagem-espera').textContent = 'Aguardando outros jogadores ficarem prontos...';
-						setTimeout(verificarProntidao, 700);
+						btnComecar.disabled = false; // Reabilitar o botão "Começar"
+						setTimeout(verificarProntidao, 700); // Continuar verificando
 					}
 				})
 				.catch(error => {
 					console.error('Erro ao verificar prontidão:', error);
 					document.getElementById('mensagem-espera').textContent = 'Erro ao verificar a prontidão dos jogadores. Tentando novamente...';
+					btnComecar.disabled = false; // Reabilitar o botão em caso de erro
 					setTimeout(verificarProntidao, 700);
 				});
 		}

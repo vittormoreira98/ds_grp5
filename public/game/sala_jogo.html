@@ -180,7 +180,9 @@
 			if (tempoRestanteSegundos <= 0) {
 				clearInterval(intervaloCronometro);
 				pontosDiv.textContent = "0"; // Garante que a pontuação seja 0 quando o tempo acabar
-				// O tempo acabou, pode adicionar aqui lógica adicional para quando o jogo terminar
+
+				// Redirecionar para a página de ranking
+				window.location.href = '/game/ranking.html';
 			}
 		}, 1000);
 
@@ -210,11 +212,6 @@
 
 				const resultado = await resposta.json();
 				
-				console.log('resultado.jogofinalizado');
-				console.log(resultado.jogofinalizado);
-				console.log('resultado.pontuacao');
-				console.log(resultado.pontuacao);
-
 				if (resultado.cd_retorno !== 0) {
 					alert(resultado.nm_retorno);
 				} else {

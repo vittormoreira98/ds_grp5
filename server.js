@@ -123,14 +123,13 @@ app.post('/entrar-sala', async (req, res) => {
 });
 
 app.post('/cadastrar-sala', async (req, res) => {
-    const { nomeDaSala, numeroJogadores, salaAberta } = req.body;
+    const { nomeDaSala, numeroJogadores } = req.body;
 
     try {
         const request = new sql.Request();
 
         request.input('nm_sala', sql.VarChar, nomeDaSala);
         request.input('nr_jogadores', sql.Int, numeroJogadores);
-        request.input('fl_sala_aberta', sql.Bit, salaAberta);
 		request.output('cd_retorno', sql.Int);
 		request.output('nm_retorno', sql.VarChar(sql.MAX));
 		request.output('nr_versao_proc', sql.VarChar(15));
@@ -239,6 +238,29 @@ app.post('/virar-carta', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(500).json({ erro: err.message });
+    }
+});
+
+app.get('/obter-ranking', async (req, res) => {
+    const { id_sala } = req.query;
+
+    try {
+        const request = new sql.Request();
+        request.input('id_sala', sql.Int, id_sala);
+        request.output('cd_retorno', sql.Int);
+        request.output('nm_retorno', sql.VarChar(255));
+
+        const resultado = await request.execute('dbo.p_obter_ranking_jogadores');
+		
+        if (resultado.output.cd_retorno !== 0) {
+            res.status(500).json({ mensagem: resultado.output.nm_retorno });
+			
+        } else {
+            res.json(resultado.recordset);
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ mensagem: "Erro ao obter ranking", erro: err });
     }
 });
 

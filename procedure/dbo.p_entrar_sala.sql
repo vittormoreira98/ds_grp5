@@ -90,6 +90,23 @@ begin try
 		when not matched then 
 			insert (id_apelido, id_sala)
 			values (source.id_apelido, source.id_sala);
+		
+		update t set
+			nr_jogadores_atuais = nr_jogadores_atuais + 1
+		from
+			dbo.t_sala_jogo_memoria t
+		where
+			t.id_sala = @id_sala
+
+		if @capacidadeatual + 1 = (select nr_jogadores from dbo.t_sala_jogo_memoria where id_sala = @id_sala)
+		begin
+			update t set
+				fl_ativo = 0
+			from
+				dbo.t_sala_jogo_memoria t
+			where
+				t.id_sala = @id_sala
+		end
 	end
 
 	select	@cd_retorno = 0,

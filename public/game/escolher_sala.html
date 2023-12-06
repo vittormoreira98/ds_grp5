@@ -20,7 +20,6 @@
 					salaElemento.innerHTML = `
 						<div class="room-sala">${sala.id_sala}</div>
 						<div class="room-name">${sala.nm_sala}</div>
-						<div class="room-status">${sala.fl_sala_aberta ? 'ABERTA' : 'PRIVADO'}</div>
 						<div class="room-occupancy">${sala.nr_jogadores_atuais}/${sala.nr_jogadores}</div>
 					`;
 					salaElemento.dataset.idSala = sala.id_sala;
@@ -71,7 +70,6 @@
 		async function criarSala() {
 			const nomeDaSala = document.querySelector('.create-room input[type="text"]').value;
 			const numeroJogadores = document.querySelector('.create-room input[type="number"]').value;
-			const salaAberta = document.querySelector('.create-room input[type="checkbox"]').checked;
 
 			try {
 				
@@ -80,7 +78,7 @@
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify({ nomeDaSala, numeroJogadores, salaAberta })
+					body: JSON.stringify({ nomeDaSala, numeroJogadores })
 				});
 				const resultado = await resposta.json();
 
@@ -102,14 +100,10 @@
 	<div class="container">
 		<header>
 			<div class="header-content">
-				<!-- Substitua 'path_to_logo_image' pelo caminho correto para a imagem do logotipo -->
-				<!--<img src="path_to_logo_image" alt="Logo" class="logo">-->
-				<!--<button class="random-room">Sala aleatória</button>-->
 			</div>
 		</header>
 
 		<div class="search-and-list-container">
-			<!--<input type="text" class="search-input" placeholder="Pesquisar sala">-->
 			<div class="room-list-container">
 				<ul class="room-list">
 
@@ -120,11 +114,6 @@
 		<div class="create-room">
 			<input type="text" placeholder="Digite o nome da sala">
 			<input type="number" placeholder="Jogadores" min="1" max="8"> <!-- Campo para número de jogadores -->
-			<div class="toggle-switch">
-				<input type="checkbox" id="room-toggle">
-				<label for="room-toggle"></label>
-			</div>
-			<span>SALA ABERTA</span>
 		</div>
 		<div class="create-room-button-container">
 			<div class="create-room">

@@ -1,151 +1,153 @@
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Winners Page
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   body {
-            font-family: 'Roboto', sans-serif;
-        }
-        .podium {
-            position: relative;
-            text-align: center;
-            padding-top: 1rem;
-        }
-        .podium::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 0.5rem solid transparent;
-            border-right: 0.5rem solid transparent;
-        }
-        .first-place::before {
-            border-bottom: 1rem solid white;
-        }
-        .second-place::before {
-            border-bottom: 0.75rem solid white;
-        }
-        .third-place::before {
-            border-bottom: 0.5rem solid white;
-        }
-        .scroll-list {
-            max-height: 10rem;
-            overflow-y: auto;
-        }
-        .list-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-  </style>
- </head>
- <body class="bg-blue-600 h-screen flex items-center justify-center">
-  <div class="bg-blue-800 text-white w-5/6 md:w-3/4 lg:w-2/3 rounded-lg p-8">
-   <h1 class="text-3xl font-bold text-center mb-2">
-    GANHADORES
-   </h1>
-   <hr class="border-white mb-6"/>
-   <div class="flex justify-between items-end mb-6">
-    <div class="podium second-place">
-     <div class="bg-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
-      <span class="text-xl font-bold text-blue-800">
-       2
-      </span>
-     </div>
-     <p class="font-semibold">
-      Silvio
-     </p>
-     <p>
-      94 pontos
-     </p>
-    </div>
-    <div class="podium first-place">
-     <div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
-      <span class="text-2xl font-bold text-blue-800">
-       1
-      </span>
-     </div>
-     <p class="font-semibold">
-      João
-     </p>
-     <p>
-      97 pontos
-     </p>
-    </div>
-    <div class="podium third-place">
-     <div class="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2">
-      <span class="text-lg font-bold text-blue-800">
-       3
-      </span>
-     </div>
-     <p class="font-semibold">
-      Lucas
-     </p>
-     <p>
-      92 pontos
-     </p>
-    </div>
-   </div>
-   <div class="scroll-list border-2 border-white rounded-lg mb-6">
-    <div class="list-item bg-white text-blue-800 px-4 py-2">
-     <p class="font-semibold">
-      4º Leticia
-     </p>
-     <p>
-      91 pontos
-     </p>
-     <p>
-      5/8
-     </p>
-    </div>
-    <div class="list-item bg-white text-blue-800 px-4 py-2">
-     <p class="font-semibold">
-      5º Caroline
-     </p>
-     <p>
-      88 pontos
-     </p>
-     <p>
-      8/8
-     </p>
-    </div>
-    <div class="list-item bg-white text-blue-800 px-4 py-2">
-     <p class="font-semibold">
-      6º Vitor
-     </p>
-     <p>
-      75 pontos
-     </p>
-     <p>
-      3/8
-     </p>
-    </div>
-    <div class="list-item bg-white text-blue-800 px-4 py-2">
-     <p class="font-semibold">
-      7º Jorge
-     </p>
-     <p>
-      53 pontos
-     </p>
-     <p>
-      1/8
-     </p>
-    </div>
-   </div>
-   <button class="w-full bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded border-2 border-white flex items-center justify-center">
-    <img alt="Cycle/retry icon" class="mr-2" height="20" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-ccyprG4JwVFjSk6POfCdQr1h/user-zv0y1moPmnDvscyZs8WI8ors/img-XyPeEhrzvTDCfPPHIp16o5lM.png?st=2023-11-29T02%3A33%3A05Z&amp;se=2023-11-29T04%3A33%3A05Z&amp;sp=r&amp;sv=2021-08-06&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2023-11-28T20%3A00%3A41Z&amp;ske=2023-11-29T20%3A00%3A41Z&amp;sks=b&amp;skv=2021-08-06&amp;sig=3eAOYP4BKPbZsn6jFyfUSL3lp0XLR/Skj5Ylj6iAe3U%3D" width="20"/>
-    Jogar novamente
-   </button>
-  </div>
- </body>
+
+<head>
+	<meta charset="utf-8" />
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<title>
+		Winners Page
+	</title>
+	<script src="https://cdn.tailwindcss.com">
+	</script>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+	<style>
+		body {
+			font-family: 'Roboto', sans-serif;
+		}
+
+		.podium {
+			position: relative;
+			text-align: center;
+			padding-top: 1rem;
+		}
+
+		.podium::before {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 0;
+			height: 0;
+			border-left: 0.5rem solid transparent;
+			border-right: 0.5rem solid transparent;
+		}
+
+		.first-place::before {
+			border-bottom: 1rem solid white;
+		}
+
+		.second-place::before {
+			border-bottom: 0.75rem solid white;
+		}
+
+		.third-place::before {
+			border-bottom: 0.5rem solid white;
+		}
+
+		.scroll-list {
+			max-height: 10rem;
+			overflow-y: auto;
+		}
+
+		.list-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+	</style>
+</head>
+
+<body class="bg-blue-600 h-screen flex items-center justify-center">
+	<div class="bg-blue-800 text-white w-5/6 md:w-3/4 lg:w-2/3 rounded-lg p-8">
+		<h1 class="text-3xl font-bold text-center mb-2">
+			GANHADORES
+		</h1>
+		<hr class="border-white mb-6" />
+		<!--<div class="flex justify-between items-end mb-6">
+			<div class="podium second-place">
+				<div class="bg-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-2">
+					<span class="text-xl font-bold text-blue-800">
+						2
+					</span>
+				</div>
+				<p class="font-semibold">
+					Silvio
+				</p>
+				<p>
+					94 pontos
+				</p>
+			</div>
+			<div class="podium first-place">
+				<div class="bg-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-2">
+					<span class="text-2xl font-bold text-blue-800">
+						1
+					</span>
+				</div>
+				<p class="font-semibold">
+					João
+				</p>
+				<p>
+					97 pontos
+				</p>
+			</div>
+			<div class="podium third-place">
+				<div class="bg-white rounded-full w-10 h-10 flex items-center justify-center mx-auto mb-2">
+					<span class="text-lg font-bold text-blue-800">
+						3
+					</span>
+				</div>
+				<p class="font-semibold">
+					Lucas
+				</p>
+				<p>
+					92 pontos
+				</p>
+			</div>
+		</div>
+		-->
+		<div class="scroll-list border-2 border-white rounded-lg mb-6">
+		</div>
+	</div>
+
+	<script>
+		async function carregarRanking() {
+		const idSala = sessionStorage.getItem('idSala');;
+
+		try {
+			const resposta = await fetch(`/obter-ranking?id_sala=${idSala}`);
+
+			if (!resposta.ok) {
+				throw new Error('Erro ao carregar ranking');
+			}
+
+			const ranking = await resposta.json();
+
+			// Atualizar a interface com os dados do ranking
+			// Você pode querer modificar os elementos HTML para exibir os dados corretamente
+			ranking.forEach((jogador, index) => {
+				// Exemplo de como você pode querer adicionar os jogadores ao ranking
+				// Adapte isso para sua estrutura HTML específica
+				const elemento = document.createElement('div');
+				elemento.className = 'list-item bg-white text-blue-800 px-4 py-2';
+				elemento.innerHTML = `
+					<p class="font-semibold">${index + 1}º ${jogador.nm_apelido}</p>
+					<p>${jogador.pontos_total} pontos</p>
+					<p>${jogador.total_acertos}/18 cartas viradas com acerto</p>
+				`;
+
+				// Adicionar o elemento ao ranking na página
+				const listaRanking = document.querySelector('.scroll-list');
+				listaRanking.appendChild(elemento);
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
+	document.addEventListener('DOMContentLoaded', carregarRanking);
+
+	</script>
+</body>
+
 </html>

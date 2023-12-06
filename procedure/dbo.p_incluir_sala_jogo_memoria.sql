@@ -5,7 +5,6 @@ create procedure dbo.p_incluir_sala_jogo_memoria
 (
 	@nm_sala					varchar(50)		= null,
     @nr_jogadores				int				= null,
-    @fl_sala_aberta				bit				= null,
 	@debug						bit				= null,
 	@id_sala					int				= null output,
 	@cd_retorno					int				= null output,
@@ -16,14 +15,13 @@ as begin
 /*
 ***********************************************************************************************************************************************************************************
 	* autor..................: Vitor Moreira
-	* objetivo...............: Incluir sala para o jogo da memória, está pode ser aberta ou fechada, tem um nome e um número de jogadores
+	* objetivo...............: Incluir sala para o jogo da memória, tem um nome e um número de jogadores
 	* criação................: 21/11/2023
 	* exemplo de chamada.....: 
 declare @cd_retorno int, @nm_retorno varchar(max),@nr_versao_proc varchar(15), @id_sala int
 exec dbo.p_incluir_sala_jogo_memoria
 	@nm_sala			= 'Sala 1',
 	@nr_jogadores		= 8,
-	@fl_sala_aberta		= 1,
 	@id_sala			= @id_sala output,
 	@cd_retorno			= @cd_retorno output,
 	@nm_retorno			= @nm_retorno output,
@@ -69,7 +67,6 @@ begin try
 		insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
 		('@nm_sala',@nm_sala,@dt_sistema),
 		('@nr_jogadores',@nr_jogadores,@dt_sistema),
-		('@fl_sala_aberta',@fl_sala_aberta,@dt_sistema),
 		('@debug',@debug,@dt_sistema),
 		('@id_sala',@id_sala,@dt_sistema),
 		('@cd_retorno',@cd_retorno,@dt_sistema),
@@ -91,11 +88,6 @@ begin try
 			return
 		end
 		
-		if @fl_sala_aberta is null
-		begin
-			select @cd_retorno = 8, @nm_retorno = 'O parâmetro @fl_sala_aberta é obrigatório'
-			return
-		end
 		
 		if @nr_jogadores <= 0 or @nr_jogadores > 8
 		begin
@@ -120,9 +112,9 @@ begin try
 	/*Resultado*/
 	begin
 
-		insert into dbo.t_sala_jogo_memoria (nm_sala,nr_jogadores,fl_sala_aberta,fl_ativo,dt_cadastro,dt_alteracao)
+		insert into dbo.t_sala_jogo_memoria (nm_sala,nr_jogadores,fl_ativo,dt_cadastro,dt_alteracao)
 		output inserted.id_sala into #t_sala_jogo_memoria (id_sala)
-		values (@nm_sala,@nr_jogadores,@fl_sala_aberta,1,@dt_sistema,@dt_sistema)
+		values (@nm_sala,@nr_jogadores,1,@dt_sistema,@dt_sistema)
 		
 		select @id_sala = t.id_sala from #t_sala_jogo_memoria t
 	end

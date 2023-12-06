@@ -346,5 +346,3 @@ app.get('/verificar-prontidao', async (req, res) => {
     }
 });
 
-
-

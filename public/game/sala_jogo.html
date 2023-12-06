@@ -209,18 +209,25 @@
 				}
 
 				const resultado = await resposta.json();
+				
+				console.log('resultado.jogofinalizado');
+				console.log(resultado.jogofinalizado);
+				console.log('resultado.pontuacao');
+				console.log(resultado.pontuacao);
+
 				if (resultado.cd_retorno !== 0) {
 					alert(resultado.nm_retorno);
 				} else {
 					atualizarInterfaceCartas(resultado.cartas);
+					if (resultado.jogofinalizado) {
+						clearInterval(intervaloPontos); // Parar o intervalo de diminuição de pontuação
+						pontosDiv.textContent = resultado.pontuacao; // Atualizar com a pontuação final do back-end
+					}
 				}
 			} catch (err) {
 				console.error('Erro ao virar carta:', err);
 			}
 		}
-
-
-
 
 		function atualizarInterfaceCartas(dadosCartas) {
 			if (!Array.isArray(dadosCartas)) {

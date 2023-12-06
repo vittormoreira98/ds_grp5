@@ -7,6 +7,9 @@ create procedure dbo.p_virar_carta_jogo_memoria
 	@id_apelido					int				= null,
 	@id_sala					int				= null,
 	@debug						bit				= null,
+	
+	@jogofinalizado 			bit				= null output,
+	@pontuacao					int				= null output,
 	@cd_retorno					int				= null output,
 	@nm_retorno					varchar(255)	= null output,
 	@nr_versao_proc				varchar(15)		= null output
@@ -42,11 +45,17 @@ begin try
 	
 	/*Declarando variaveis internas*/
 	begin
-		declare	@dt_sistema					datetime = getdate(),
-				@fl_acertou					bit = 0,
-				@id_carta_virada_rodada_1	int = 0,
-				@nr_carta_virada_rodada_1	int = 0,
-				@nr_carta_virada_rodada_2	int = 0
+		declare	@dt_sistema					datetime	= getdate(),
+				@fl_acertou					bit 		= 0,
+				@id_carta_virada_rodada_1	int 		= 0,
+				@nr_carta_virada_rodada_1	int 		= 0,
+				@nr_carta_virada_rodada_2	int 		= 0
+		
+		/*Controle de pontuação*/
+		declare	@tempoiniciojogo		datetime,
+				@tempoatual 			datetime		= getdate(),
+				@tempototaljogo			int				= 90 * 1000, /*Tempo total do jogo em milissegundos (90 segundos)*/
+				@tempopassado			int
 	end
 
 	insert into dbo.debug (nm_campo,vl_campo,dt_sistema) values 
@@ -110,6 +119,19 @@ begin try
 			fl_carta_virada_acerto		bit				not null
 		)
 
+	end
+
+	/*Definindo valores para variáveis de controle de pontuação*/
+	begin
+		select @jogofinalizado = 0, @pontuacao = 0
+		/*Obter o tempo de início do jogo para o jogador*/
+		select
+			@tempoiniciojogo = t.dt_inicio_jogo
+		from
+			dbo.t_apelido_sala t
+		where
+			t.id_apelido = @id_apelido
+			and t.id_sala = @id_sala
 	end
 
 	/*Inserindo dados nas tabelas temporarias*/
@@ -210,13 +232,35 @@ begin try
 	from
 		#t_apelido_sala_cartas_pvcjm t
 	
-	
+	/*Definindo fim do jogo*/
+	begin
+		/*Calcular o tempo passado desde o início do jogo*/
+    	set @tempoPassado = datediff(millisecond, @tempoiniciojogo, @tempoatual)
+
+		-- Verificar se todas as cartas foram acertadas
+		if (select count(*) from dbo.t_apelido_sala_cartas t where t.id_apelido = @id_apelido and t.fl_carta_virada_acerto = 0) = 0
+		begin
+			set @jogofinalizado = 1
+
+			/*Calcular a pontuação com base no tempo passado*/
+			set @pontuacao = round((@tempototaljogo - @tempoPassado) * (1000.0 / @tempototaljogo), 0)
+			
+			update t set
+				fl_jogo_finalizado		= @jogofinalizado,
+				vl_pontuacao			= @pontuacao
+			from
+				dbo.t_apelido_sala t
+			where
+				t.id_apelido = @id_apeli
+				do
+				and t.id_sala = @id_sala
+		end
+	end
 
 	/*Definindo retorno com processamento efetuado com sucesso*/
 	select	@cd_retorno = 0,
 			@nm_retorno = 'Processamento efetuado com sucesso'
 	
-
 
 end try
 begin catch

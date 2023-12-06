@@ -172,6 +172,15 @@ begin try
 			nr_imagem		= t.nr_imagem
 		from
 			#t_apelido_sala_cartas t
+		
+		/*Marcando data e horário do inicio de jogo para o jogador na sala*/
+		update t set
+			dt_inicio_jogo	= getdate()
+		from
+			dbo.t_apelido_sala t
+		where
+			t.id_apelido = @id_apelido
+			and t.id_sala = @id_sala
 
 	end
 	

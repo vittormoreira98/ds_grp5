@@ -216,13 +216,25 @@ app.post('/virar-carta', async (req, res) => {
         request.input('id_sala', sql.Int, id_sala);
         request.output('cd_retorno', sql.Int);
         request.output('nm_retorno', sql.VarChar(255));
+        request.output('pontuacao', sql.Int);
+        request.output('jogofinalizado', sql.Bit);
 
         const resultado = await request.execute('dbo.p_virar_carta_jogo_memoria');
 
         if (resultado.output.cd_retorno !== 0) {
-            res.json({ cd_retorno: resultado.output.cd_retorno, nm_retorno: resultado.output.nm_retorno });
+            res.json({
+				cd_retorno: resultado.output.cd_retorno,
+				nm_retorno: resultado.output.nm_retorno,
+				pontuacao: resultado.output.pontuacao, // Adicionar campo de pontuação
+				jogofinalizado: resultado.output.jogofinalizado // Adicionar campo para indicar o fim do jogo
+			 });
         } else {
-            res.json({ cd_retorno: 0, cartas: resultado.recordset });
+            res.json({
+				cd_retorno: resultado.output.cd_retorno,
+				nm_retorno: resultado.output.nm_retorno, 
+				pontuacao: resultado.output.pontuacao, // Adicionar campo de pontuação
+				jogofinalizado: resultado.output.jogofinalizado, // Adicionar campo para indicar o fim do jogo
+				cartas: resultado.recordset });
         }
     } catch (err) {
         console.error(err);

@@ -36,7 +36,10 @@ create table dbo.t_apelido_sala
 	id_apelido_sala				int				identity(1,1)	not null,
 	id_apelido					int				not null,
 	id_sala						int				not null,
-	dt_atualizacao				datetime		not null	default(getdate())
+	dt_atualizacao				datetime		not null	default(getdate()),
+	dt_inicio_jogo				datetime		null,
+	fl_jogo_finalizado			bit				not null	default(0),
+	vl_pontuacao				int				not null	default(0)
 )
 if exists (select top 1 1 from dbo.sysobjects where id = object_id(N'dbo.t_apelido_sala_cartas') and objectproperty(id, N'IsUserTable') = 1)
 	drop table dbo.t_apelido_sala_cartas
